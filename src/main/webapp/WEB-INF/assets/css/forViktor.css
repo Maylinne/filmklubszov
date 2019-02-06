@@ -1,0 +1,58 @@
+.myTable {
+    width: 100%;
+}
+
+.myTable tr {
+    border-bottom: 1px solid #38a7bb;
+}
+
+.myTable td {
+    padding: 20px 0px;
+}
+
+.myButton {
+    margin-top: 20px;
+}
+
+.spotTable {
+    table-layout:fixed;
+    width: 100%;
+}
+
+#forTheJson p {
+    background-color: lightblue;
+    padding: 20px 10px;
+}
+
+.expandButton :hover {
+	cursor: pointer;
+}
+
+.expandButton i {
+	transition: transform 0.2s ease-in-out;
+}
+
+.reverse {
+	transform:rotate(180deg);
+	transition: transform 0.2s ease-in-out;
+}
+
+.addButtonText {
+	font-size: 14px;
+    font-family: "Roboto", Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    padding-left: 10px;
+}
+
+.listAction {
+	color: #38a7bb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.listAction i {
+	margin: 0 5px;
+}
+
+
+

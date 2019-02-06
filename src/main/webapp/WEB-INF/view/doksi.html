@@ -1,0 +1,214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>Welcome to filmklubszov.hu's REST API documentation!</title>
+
+<link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+<link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+<script type="text/javascript">
+	var DOCUMENTATION_OPTIONS = {
+		URL_ROOT : './',
+		VERSION : '1.0.0',
+		COLLAPSE_INDEX : false,
+		FILE_SUFFIX : '.html',
+		HAS_SOURCE : true
+	};
+</script>
+<script type="text/javascript" src="_static/jquery.js"></script>
+<script type="text/javascript" src="_static/underscore.js"></script>
+<script type="text/javascript" src="_static/doctools.js"></script>
+<link rel="index" title="Index" href="genindex.html" />
+<link rel="search" title="Search" href="search.html" />
+<link rel="top" title="mf-backend 1.0.0 documentation" href="#" />
+
+<link rel="stylesheet" href="_static/custom.css" type="text/css" />
+
+
+<meta name="viewport"
+	content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+</head>
+<body role="document">
+
+
+	<div class="document">
+		<div class="documentwrapper">
+			<div class="bodywrapper">
+				<div class="body" role="main">
+
+					<div class="section" id="welcome-to-mf-backend-s-documentation">
+						<h1>
+							Welcome to filmklubszov.hu's REST API documentation!
+						</h1>
+						<div class="toctree-wrapper compound"></div>
+						
+						<dl class="get">
+							<dt id="get--venues-filtered">
+								<code class="descname">GET </code>
+								<code class="descname">/api/locations?withspots=</code>
+							</dt>
+							<dd>
+								<p>Queries a list of locations. The withspots parameter can
+									have two values: "true", or "false." It sets, that the list
+									will contain the list of spots as well, or not.</p>
+								<h5>Parameters:</h5>
+								<ul>
+									<li>withspots
+										<ul>
+											<li>true: Requests the list of locations with the spots.</li>
+											<li>false: Requests the list of locations without the spots.</li>
+										</ul>
+									</li>
+								</ul>
+								<h5>Returns:</h5>
+								<p>A json object.</p>
+							</dd>
+						</dl>
+
+						<dl class="get">
+							<dt id="get--venues-filtered">
+								<code class="descname">GET </code>
+								<code class="descname">/api/locations?id={id}&withspots=</code>
+							</dt>
+							<dd>
+								<p>Requests a specific location by its id. The withspots parameter can
+									have two values: "true", or "false." It sets, that the list
+									will contain the list of spots as well, or not.</p>
+								<h5>Parameters:</h5>
+								<ul>
+									<li>id
+										<ul>
+											<li>number: Sets the id of requested location.</li>
+										</ul>
+									</li>
+									<li>withspots
+										<ul>
+											<li>true: Requests the list of locations with the spots.</li>
+											<li>false: Requests the list of locations without the spots.</li>
+										</ul>
+									</li>
+								</ul>
+								<h5>Returns:</h5>
+								<p>A json object.</p>
+							</dd>
+						</dl>
+
+						<dl class="get">
+							<dt id="get--venues-filtered">
+								<code class="descname">GET </code>
+								<code class="descname">/api/movies?withcuts=</code>
+							</dt>
+							<dd>
+								<p>Queries a list of movies. The withcuts parameter can
+									have two values: "true", or "false." It sets, that the list
+									will contain the list of cuts as well, or not.</p>
+								<h5>Parameters:</h5>
+								<ul>
+									<li>withcuts
+										<ul>
+											<li>true: Requests the list of movies with the cuts.</li>
+											<li>false: Requests the list of movies without the cuts.</li>
+										</ul>
+									</li>
+								</ul>
+								<h5>Returns:</h5>
+								<p>A json object.</p>
+							</dd>
+						</dl>
+
+						<dl class="get">
+							<dt id="get--venues-filtered">
+								<code class="descname">GET </code>
+								<code class="descname">/api/movies?id={id}&withcuts=</code>
+							</dt>
+							<dd>
+								<p>Requests a specific movie by its id. The withcuts parameter can
+									have two values: "true", or "false." It sets, that the list
+									will contain the list of cuts as well, or not.</p>
+								<h5>Parameters:</h5>
+								<ul>
+									<li>id
+										<ul>
+											<li>number: Sets the id of requested movie.</li>
+										</ul>
+									</li>
+									<li>withspots
+										<ul>
+											<li>true: Requests the list of movies with the cuts.</li>
+											<li>false: Requests the list of movies without the cuts.</li>
+										</ul>
+									</li>
+								</ul>
+								<h5>Returns:</h5>
+								<p>A json object.</p>
+							</dd>
+						</dl>
+						
+						<dl class="get">
+							<dt id="get--venues-filtered">
+								<code class="descname">POST </code>
+								<code class="descname">/api/location</code>
+							</dt>
+							<dd>
+								<p>Adds a single location. Can be sent only with spot data.</p>
+								<h5>Accepts:</h5>
+								<p>A json object.</p>
+							</dd>
+						</dl>
+						
+						<dl class="get">
+							<dt id="get--venues-filtered">
+								<code class="descname">POST </code>
+								<code class="descname">/api/spot</code>
+							</dt>
+							<dd>
+								<p>Adds a single spot. The data contains the id of the location.</p>
+								<h5>Accepts:</h5>
+								<p>A json object.</p>
+							</dd>
+						</dl>
+						
+												<dl class="get">
+							<dt id="get--venues-filtered">
+								<code class="descname">POST </code>
+								<code class="descname">/api/movie</code>
+							</dt>
+							<dd>
+								<p>Adds a single movie. Can be sent only with cut data.</p>
+								<h5>Accepts:</h5>
+								<p>A json object.</p>
+							</dd>
+						</dl>
+						
+						<dl class="get">
+							<dt id="get--venues-filtered">
+								<code class="descname">POST </code>
+								<code class="descname">/api/cut</code>
+							</dt>
+							<dd>
+								<p>Adds a single cut. The data contains the id of the movie.</p>
+								<h5>Accepts:</h5>
+								<p>A json object.</p>
+							</dd>
+						</dl>
+						</div>
+						<!-- NOT MINE --- NOT MINE -->
+
+					
+				</div>
+			</div>
+		</div>
+		<div class="sphinxsidebar" role="navigation"
+			aria-label="main navigation">
+
+		</div>
+	</div>
+
+</body>
+</html>
