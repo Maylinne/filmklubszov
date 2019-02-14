@@ -5,14 +5,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.api.services.drive.model.File;
 
 import fksz.authentication.service.AuthenticationService;
-import fksz.authentication.view.model.LoginRequest;
 import fksz.driveapi.MyDriveService;
 import fksz.home.view.support.LocalizationUrlBuilder;
 import fksz.i18n.service.LocalizationService;

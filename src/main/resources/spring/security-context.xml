@@ -7,8 +7,6 @@
 
   <http auto-config="true">
     <anonymous enabled="false" />
-    <intercept-url pattern="/**/addBookForm.html" access="ROLE_ADMIN" />
-    <intercept-url pattern="/**/addBookPost.html" access="ROLE_ADMIN" />
     <intercept-url pattern="/**/movies" access="ROLE_ADMIN" />
     <intercept-url pattern="/**/locations" access="ROLE_ADMIN" />
     <intercept-url pattern="/**/users" access="ROLE_ADMIN" />
