@@ -15,7 +15,6 @@ import fksz.i18n.service.LocalizationService;
 @Controller
 public class ExampleController extends MasterController{
 
-
 	public ExampleController(LocalizationService localizationService, AuthenticationService authenticationService, LocalizationUrlBuilder localizationUrlBuilder) {
 		super(localizationService, authenticationService, localizationUrlBuilder);
 	}

@@ -12,9 +12,8 @@
     <intercept-url pattern="/**/movies" access="ROLE_ADMIN" />
     <intercept-url pattern="/**/locations" access="ROLE_ADMIN" />
     <intercept-url pattern="/**/users" access="ROLE_ADMIN" />
-    <intercept-url pattern="/**/clearShoppingCart.html" access="ROLE_ADMIN, ROLE_USER"/>
     <form-login login-page="/login.html" default-target-url="/" authentication-failure-url="/login.html" password-parameter="password"
-      username-parameter="username" />
+      username-parameter="email" />
     <logout logout-success-url="/" />
   </http>
 

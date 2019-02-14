@@ -1,0 +1,1 @@
+INSERT INTO `filmklub`.`user` (`id`, `email`, `name`, `password`, `role`) VALUES ('2', 'fksz@fksz.com', 'Labáth Viktor', '$2a$11$FNqfP9xgkMZqP9Qb/71.c.prnJ1e5Rz7Pyug46/gKlfPfKMn.ZNAq', 'ROLE_ADMIN');

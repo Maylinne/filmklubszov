@@ -8,15 +8,18 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import fksz.authentication.service.AuthenticationService;
 import fksz.authentication.view.model.LoginRequest;
+import fksz.controllers.MasterController;
+import fksz.home.view.support.LocalizationUrlBuilder;
+import fksz.i18n.service.LocalizationService;
 
 @Controller
-public class LoginFormController {
+public class LoginFormController extends MasterController {
 	public static final String REQUEST_MAPPING = "/login.html";
 
-	@ModelAttribute("loginRequest")
-	public LoginRequest createLoginRequest() {
-		return new LoginRequest();
+	public LoginFormController(LocalizationService localizationService, AuthenticationService authenticationService, LocalizationUrlBuilder localizationUrlBuilder) {
+		super(localizationService, authenticationService, localizationUrlBuilder);
 	}
 
 	@RequestMapping(REQUEST_MAPPING)
