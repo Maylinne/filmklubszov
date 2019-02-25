@@ -25,7 +25,6 @@ public class MyDriveService {
 			e.printStackTrace();
 			return null; 
 		}
-		
 	}
     
 	 // com.google.api.services.drive.model.File
