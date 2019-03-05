@@ -62,7 +62,7 @@
                         <h4 class="modal-title" id="AddUser">Felhasználó hozzáadása/szerkesztése</h4>
                     </div>
                     <div class="modal-body">
-                         <form:form modelAttribute="userRequest" action="adduser/adduserpost" method="post">
+                         <form:form modelAttribute="userRequest" action="users/adduserpost" method="post">
                         	<form:input path="id" id="Id" type="number" style="display:none"/>
                             <div class="form-group">
                                 <form:input path="name" type="text" class="form-control" id="Name" placeholder="Felhasználónév" />

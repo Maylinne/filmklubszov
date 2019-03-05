@@ -96,9 +96,6 @@ public class MyDriveService {
     
     public OutputStream downloadFile(String fileId) throws IOException {
     	OutputStream outputStream = new ByteArrayOutputStream();
-    	
-        //String fileId = file.getId();
-        //String fileMime = file.getMimeType();
         
         driveService.files().get(fileId).executeMediaAndDownloadTo(outputStream);
         

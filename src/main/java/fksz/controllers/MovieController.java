@@ -64,13 +64,13 @@ public class MovieController extends MasterController {
 	@RequestMapping(value="/addfilmmeta", method=RequestMethod.POST)
 	public String saveFilmMeta (FilmMetaRequest filmMetaRequest, BindingResult bindingResult) {
 		filmMetaService.save(filmMetaTransformer.requestToDto(filmMetaRequest));
-		return "redirect:/addmovie";
+		return "redirect:/movies";
 	}
 	
 	@RequestMapping(value="/addcut", method=RequestMethod.POST)
 	public String saveFilmMeta (CutRequest cutRequest, BindingResult bindingResult) {
 		cutService.save(cutTransformer.requestToDto(cutRequest));
-		return "redirect:/addmovie";
+		return "redirect:/movies";
 	}
 	
 	@RequestMapping(value="/getfilmmetabyid", method=RequestMethod.GET, headers="Accept=*/*", produces="application/json")

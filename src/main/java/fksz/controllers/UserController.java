@@ -54,7 +54,7 @@ public class UserController extends MasterController{
 	public String saveuser (UserRequest userRequest, BindingResult bindingResult) {
 		userRequest.setPassword("AlmAfA01");
 		userService.save(userTransformer.requestToDto(userRequest));
-		return "redirect:/adduser";
+		return "redirect:/users";
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)

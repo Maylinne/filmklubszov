@@ -62,13 +62,13 @@ public class LocationController extends MasterController {
 	@RequestMapping(value="/addlocation", method=RequestMethod.POST)
 	public String saveLocation (LocationRequest locationRequest, BindingResult bindingResult) {
 		locationService.save(locationTransformer.requestToDto(locationRequest));
-		return "redirect:/location";
+		return "redirect:/locations";
 	}
 	
 	@RequestMapping(value="/addspot", method=RequestMethod.POST)
 	public String saveSpot (SpotRequest spotRequest, BindingResult bindingResult) {
 		spotService.save(spotTransformer.requestToDto(spotRequest));
-		return "redirect:/location";
+		return "redirect:/locations";
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)

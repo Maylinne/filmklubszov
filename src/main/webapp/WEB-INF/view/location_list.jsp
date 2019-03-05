@@ -100,7 +100,7 @@
                         <h4 class="modal-title" id="AddLocation">Helyszin hozzáadása/szerkesztése</h4>
                     </div>
                     <div class="modal-body">
-                        <form:form modelAttribute="locationRequest" action="location/addlocation" method="post">
+                        <form:form modelAttribute="locationRequest" action="locations/addlocation" method="post">
                             <div class="form-group">
                                 <form:input path="name" type="text" class="form-control" id="Name" placeholder="Helyszin neve" />
                             </div>
@@ -130,7 +130,7 @@
                         <h4 class="modal-title" id="AddSpot">Terem hozzáadása/szerkesztése</h4>
                     </div>
                     <div class="modal-body">
-                        <form:form modelAttribute="spotRequest" action="location/addspot" method="post">
+                        <form:form modelAttribute="spotRequest" action="locations/addspot" method="post">
                         	<form:input path="locationId" id="LocationId" type="number" style="display:none"/>
                             <div class="form-group">
                                 <form:input path="name" type="text" class="form-control" id="Name" placeholder="Terem neve" />

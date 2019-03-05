@@ -102,7 +102,7 @@
 					</div>
 					<div class="modal-body">
 						<form:form modelAttribute="filmMetaRequest"
-							action="addmovie/addfilmmeta" method="post">
+							action="movies/addfilmmeta" method="post">
 							<form:input path="id" id="Id" type="number" style="display:none" />
 							<div class="form-group">
 								<form:input path="title" type="text" class="form-control"
@@ -141,7 +141,7 @@
 						<h4 class="modal-title" id="AddFilm">Kópia hozzáadása</h4>
 					</div>
 					<div class="modal-body">
-						<form:form modelAttribute="cutRequest" action="addmovie/addcut"
+						<form:form modelAttribute="cutRequest" action="movies/addcut"
 							method="post">
 							<form:input path="filmMetaId" id="FilmMetaId" type="number"
 								style="display:none" />

@@ -57,7 +57,8 @@ public class MasterController {
 	@ModelAttribute("driveFiles")
 	public List<File> driveFiles() throws IOException {
 		List<File> driveFiles = new ArrayList<>();
-		driveFiles = driveService.getGoogleFilesByParent("NewFolder");
+		driveFiles = driveService.getGoogleFilesByParent("FilmklubszovPublikus");
+		System.out.println("You can rest here for a while...");
 		return driveFiles;
 	}
 	

@@ -24,7 +24,7 @@
 							<form:errors element="div" cssClass="validation-error" />
 							<div class="form-group">
 								<p>
-									<form:input path="username" class="form-control"
+									<form:input path="email" class="form-control"
 										id="input_email" placeholder="E-mail" />
 								</p>
 								<p>
