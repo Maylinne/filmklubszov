@@ -1,48 +1,55 @@
 package fksz.requests;
 
-import fksz.domain.Cut;
-import fksz.domain.Spot;
-import fksz.domain.User;
-
 public class OfferRequest {
-	
+
 	private int id;
-	private User partner;
-	private Cut cut;
-	private Spot spot;
+	private int partnerId;
+	private int cutId;
+	private int spotId;
 	private String description;
-	
-	OfferRequest() {}
-	
+
+	public OfferRequest() {
+	}
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	public User getPartner() {
-		return partner;
-	}
-	public void setPartner(User partner) {
-		this.partner = partner;
-	}
-	public Cut getCut() {
-		return cut;
-	}
-	public void setCut(Cut cut) {
-		this.cut = cut;
-	}
-	public Spot getSpot() {
-		return spot;
-	}
-	public void setSpot(Spot spot) {
-		this.spot = spot;
-	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	public int getCutId() {
+		return cutId;
+	}
+
+	public void setCutId(int cutId) {
+		this.cutId = cutId;
+	}
+
+	public int getSpotId() {
+		return spotId;
+	}
+
+	public void setSpotId(int spotId) {
+		this.spotId = spotId;
+	}
+
+	public int getPartnerId() {
+		return partnerId;
+	}
+
+	public void setPartnerId(int partnerId) {
+		this.partnerId = partnerId;
+	}
+
 
 }

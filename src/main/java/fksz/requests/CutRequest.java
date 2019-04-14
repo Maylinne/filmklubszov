@@ -2,6 +2,7 @@ package fksz.requests;
 
 public class CutRequest {
 	
+	private int cutId;
 	private String title;
 	private String hungarianTitle;
 	private String year;
@@ -62,6 +63,14 @@ public class CutRequest {
 
 	public void setFilmMetaId(int filmMetaId) {
 		this.filmMetaId = filmMetaId;
+	}
+
+	public int getCutId() {
+		return cutId;
+	}
+
+	public void setCutId(int cutId) {
+		this.cutId = cutId;
 	}
 
 	

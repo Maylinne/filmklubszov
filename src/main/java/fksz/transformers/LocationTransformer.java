@@ -35,7 +35,6 @@ public class LocationTransformer {
 		entity.setCity(dto.getCity());
 		entity.setAddress(dto.getAddress());
 		entity.setDescription(dto.getDescription());
-		entity.setSpots(spotTransformer.dtosToEntities(dto.getSpots()));
 		return entity;
 	}
 	
@@ -57,7 +56,6 @@ public class LocationTransformer {
 		dto.setCity(request.getCity());
 		dto.setAddress(request.getAddress());
 		dto.setDescription(request.getDescription());
-		dto.setSpots(spotTransformer.requestsToDtos(request.getSpots()));
 		return dto;
 	}
 	

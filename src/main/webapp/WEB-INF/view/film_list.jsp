@@ -16,7 +16,7 @@
 				<div class="box">
 
 					<div class="table-responsive">
-						<table class="table">
+						<table class="table movieTable">
 							<thead>
 								<tr>
 									<th colspan="2">Film</th>
@@ -38,9 +38,9 @@
 													value="${filmMetaModel.title} (${filmMetaModel.hungarianTitle})"></c:out>
 											</h5></td>
 										<td colspan="2"><c:out value="${filmMetaModel.director}"></c:out></td>
-										<td><span class="listAction deleteFilm"><i
-												class="fa fa-trash-o"></i></span> <span class="listAction editFilm"><i
-												class="fa fa-edit"></i></span></td>
+										<td><span class="listAction deleteFilm"><i class="fa fa-trash-o"></i></span> 
+											<span class="listAction editFilm"><i class="fa fa-edit"></i></span>
+										</td>
 									</tr>
 
 
@@ -63,12 +63,14 @@
 												<tbody>
 													<c:if test="${not empty filmMetaModel.cuts}">
 														<c:forEach var="cutModel" items="${filmMetaModel.cuts}">
-															<tr>
+															<tr data-cutId="${cutModel.cutId}">
 																<td><c:out value="${cutModel.title}"></c:out></td>
 																<td><c:out value="${cutModel.year}"></c:out></td>
 																<td><c:out value="${cutModel.length}"></c:out></td>
-																<td><a href="#"><i class="fa fa-trash-o"></i></a> <a
-																	href="#"><i class="fa fa-edit"></i></a></td>
+																<td>
+																	<span class="listAction deleteCut"><i class="fa fa-trash-o"></i></span> 
+																	<span class="listAction editCut"><i class="fa fa-edit"></i></span>
+																</td>
 															</tr>
 														</c:forEach>
 													</c:if>
@@ -101,21 +103,17 @@
 						<h4 class="modal-title" id="AddFilm">Film hozzáadása/szerkesztése</h4>
 					</div>
 					<div class="modal-body">
-						<form:form modelAttribute="filmMetaRequest"
-							action="movies/addfilmmeta" method="post">
+						<form:form modelAttribute="filmMetaRequest" action="movies/addfilmmeta" method="post">
 							<form:input path="id" id="Id" type="number" style="display:none" />
 							<div class="form-group">
-								<form:input path="title" type="text" class="form-control"
-									id="Title" placeholder="Film eredeti címe" />
+								<form:input path="title" type="text" class="form-control" id="Title" placeholder="Film eredeti címe" />
 							</div>
 							<div class="form-group">
-								<form:input path="hungarianTitle" type="text"
-									class="form-control" id="HungarianTitle"
+								<form:input path="hungarianTitle" type="text" class="form-control" id="HungarianTitle"
 									placeholder="Film magyar címe" />
 							</div>
 							<div class="form-group">
-								<form:input path="director" type="text" class="form-control"
-									id="Director" placeholder="Rendező" />
+								<form:input path="director" type="text" class="form-control" id="Director" placeholder="Rendező" />
 							</div>
 
 							<p class="text-center">
@@ -141,26 +139,21 @@
 						<h4 class="modal-title" id="AddFilm">Kópia hozzáadása</h4>
 					</div>
 					<div class="modal-body">
-						<form:form modelAttribute="cutRequest" action="movies/addcut"
-							method="post">
-							<form:input path="filmMetaId" id="FilmMetaId" type="number"
-								style="display:none" />
+						<form:form modelAttribute="cutRequest" action="movies/addcut" method="post">
+							<form:input path="cutId" id="Id" type="number" style="display:none" />
+							<form:input path="filmMetaId" id="FilmMetaId" type="number" style="display:none" />
 							<div class="form-group">
-								<form:input path="title" type="text" class="form-control"
-									id="Title" placeholder="Kópia eredeti címe" />
+								<form:input path="title" type="text" class="form-control" id="Title" placeholder="Kópia eredeti címe" />
 							</div>
 							<div class="form-group">
-								<form:input path="hungarianTitle" type="text"
-									class="form-control" id="HungarianTitle"
+								<form:input path="hungarianTitle" type="text" class="form-control" id="HungarianTitle"
 									placeholder="Kópia magyar címe" />
 							</div>
 							<div class="form-group">
-								<form:input path="length" type="number" class="form-control"
-									id="Length" placeholder="Hossz" />
+								<form:input path="length" type="number" class="form-control" id="Length" placeholder="Hossz" />
 							</div>
 							<div class="form-group">
-								<form:input path="year" type="number" class="form-control"
-									id="Year" placeholder="Kiadás éve" />
+								<form:input path="year" type="number" class="form-control" id="Year" placeholder="Kiadás éve" />
 							</div>
 							<p class="text-center">
 								<button type="submit" class="btn btn-template-main">

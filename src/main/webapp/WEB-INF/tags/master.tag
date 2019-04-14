@@ -124,7 +124,7 @@ _________________________________________________________ -->
 					<div class="container">
 						<div class="navbar-header">
 
-							<a class="navbar-brand home" href="index.html">
+							<a class="navbar-brand home" href="">
 								<div
 									style="font-family: 'Pacifico', serif; font-size: 39px; margin-top: 10px">filmklubszovetseg.hu</div>
 							</a>
@@ -274,6 +274,7 @@ _________________________________________________________ -->
 															<li><a href="<c:url value="/movies" />">Filmek</a></li>
 															<li><a href="<c:url value="/locations" />">Helyszinek</a></li>
 															<li><a href="<c:url value="/users" />">Felhasználók</a></li>
+															<li><a href="<c:url value="/offers" />">Ajánlatok</a></li>
 
 														</ul>
 													</div>

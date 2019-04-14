@@ -38,13 +38,13 @@ public class LocationService {
 	public LocationDto getById(Integer id) {
 		return transformer.entityToDto(dao.findById(id));
 	}
+	
+	public Location getByIdForEntity(Integer id) {
+		return dao.findById(id);
+	}
 
 	public List<LocationDto> getAll() {
 		return transformer.entitiesToDtos(dao.findAll());
-	}
-	
-	public Location getLocById(Integer id) {
-		return dao.findById(id);
 	}
 
 }

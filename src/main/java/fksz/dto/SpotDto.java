@@ -5,7 +5,7 @@ public class SpotDto {
 	private int id;
 	private String name;
 	private int places;
-	private int location;
+	private int locationId;
 	private String description;
 	
 	public SpotDto() {}
@@ -34,12 +34,12 @@ public class SpotDto {
 		this.places = places;
 	}
 
-	public int getLocation() {
-		return location;
+	public int getLocationId() {
+		return locationId;
 	}
 
-	public void setLocation(int location) {
-		this.location = location;
+	public void setLocationId(int location) {
+		this.locationId = location;
 	}
 
 	public String getDescription() {

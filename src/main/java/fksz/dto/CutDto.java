@@ -2,6 +2,7 @@ package fksz.dto;
 
 public class CutDto {
 
+	private int cutId;
 	private String title;
 	private String hungarianTitle;
 	private int year;
@@ -9,7 +10,7 @@ public class CutDto {
 	private String imdbUrl;
 	private String cut;
 	private String description;
-	private FilmMetaDto filmMeta;
+	private int filmMetaId;
 	
 	public CutDto() {}
 
@@ -69,15 +70,20 @@ public class CutDto {
 		this.description = description;
 	}
 
-	public FilmMetaDto getFilmMeta() {
-		return filmMeta;
+	public int getFilmMetaId() {
+		return filmMetaId;
 	}
 
-	public void setFilmMeta(FilmMetaDto filmMeta) {
-		this.filmMeta = filmMeta;
+	public void setFilmMetaId(int filmMetaId) {
+		this.filmMetaId = filmMetaId;
+	}
+
+	public int getCutId() {
+		return cutId;
+	}
+
+	public void setCutId(int cutId) {
+		this.cutId = cutId;
 	}
 	
-	
-	
-
 }

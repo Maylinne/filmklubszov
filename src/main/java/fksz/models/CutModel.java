@@ -1,9 +1,8 @@
 package fksz.models;
 
-import fksz.domain.FilmMeta;
-
 public class CutModel {
 	
+	private int cutId;
 	private String title;
 	private String hungarianTitle;
 	private String year;
@@ -11,7 +10,9 @@ public class CutModel {
 	private String imdbUrl;
 	private String cut;
 	private String description;
-	private FilmMeta filmMeta;
+	private int filmMetaId;
+	private String filmMetaTitle;
+	private String filmMetaHungarianTitle;
 	
 	public CutModel() {}
 
@@ -55,14 +56,6 @@ public class CutModel {
 		this.description = description;
 	}
 
-	public FilmMeta getFilmMeta() {
-		return filmMeta;
-	}
-
-	public void setFilmMeta(FilmMeta filmMeta) {
-		this.filmMeta = filmMeta;
-	}
-
 	public String getYear() {
 		return year;
 	}
@@ -77,6 +70,38 @@ public class CutModel {
 
 	public void setLength(String length) {
 		this.length = length;
+	}
+
+	public int getFilmMetaId() {
+		return filmMetaId;
+	}
+
+	public void setFilmMetaId(int filmMetaId) {
+		this.filmMetaId = filmMetaId;
+	}
+
+	public String getFilmMetaTitle() {
+		return filmMetaTitle;
+	}
+
+	public void setFilmMetaTitle(String filmMetaTitle) {
+		this.filmMetaTitle = filmMetaTitle;
+	}
+
+	public String getFilmMetaHungarianTitle() {
+		return filmMetaHungarianTitle;
+	}
+
+	public void setFilmMetaHungarianTitle(String filmMetaHungarianTitle) {
+		this.filmMetaHungarianTitle = filmMetaHungarianTitle;
+	}
+
+	public int getCutId() {
+		return cutId;
+	}
+
+	public void setCutId(int cutId) {
+		this.cutId = cutId;
 	}
 	
 	

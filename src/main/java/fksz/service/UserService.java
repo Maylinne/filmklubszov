@@ -1,27 +1,49 @@
 package fksz.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+import java.util.UUID;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import fksz.dao.UserDao;
 import fksz.domain.MyUserPrincipal;
 import fksz.domain.User;
+import fksz.domain.UserStatus;
 import fksz.dto.UserDto;
+import fksz.googletools.GmailUtils;
+import fksz.requests.ChangePswRequest;
 import fksz.transformers.UserTransformer;
 
 @Component
-public class UserService implements UserDetailsService{
+public class UserService implements UserDetailsService {
 
 	@Autowired
 	UserDao dao;
-	
+
 	@Autowired
 	UserTransformer transformer;
+
+	@Autowired
+	BCryptPasswordEncoder pswEncoder;
+	
+	@Autowired
+	GmailUtils gmailUtils;
 
 	public void save(UserDto dto) {
 		dao.save(transformer.dtoToEntity(dto));
@@ -39,25 +61,134 @@ public class UserService implements UserDetailsService{
 		dao.delete(id);
 	}
 
-	public User getById(Integer id) {
-		return dao.findById(id);
+	public UserDto getById(Integer id) {
+		return transformer.entitytoDto(dao.findById(id));
+	}
+	
+	public UserDto getByName(String name) {
+		return transformer.entitytoDto(dao.findByName(name));
 	}
 
 	public List<UserDto> getAll() {
 		return transformer.entiesToDtos(dao.findAll());
 	}
 
-    @Override
-    public UserDetails loadUserByUsername(String email) {
-        User user = dao.findByEmail(email);
-        if (user == null) {
-            throw new UsernameNotFoundException(email);
-        }
-        return new MyUserPrincipal(user);
-    }
-    
-    
-    
-    
-    
+	public Map<Integer, String> allTheAvailableUsers() {
+		Map<Integer, String> availableUsers = new HashMap<>();
+		for (UserDto user : getAll()) {
+			if (user.getRole().equals("ROLE_ADMIN") || user.getRole().equals("ROLE_VENDOR")) {
+				availableUsers.put(user.getId(), user.getName());
+			}
+		}
+		return availableUsers;
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String email) {
+		User user = dao.findByEmail(email);
+		if (user == null) {
+			throw new UsernameNotFoundException(email);
+		}
+		return new MyUserPrincipal(user);
+	}
+
+	public String generateNewPassword() {
+		String newPassword = new String();
+		String genpart = UUID.randomUUID().toString();
+		newPassword = genpart.substring(2, 7) + "gen";
+		return newPassword;
+	}
+
+	public void changeUserPassword(ChangePswRequest request) {
+		UserDto user = getById(request.getUserId());
+		if (isPswChangeble(request, user)) {
+			user.setPassword(request.getNewPsw());
+			if (user.getStatus() == UserStatus.PENDING) {
+				user.setStatus(UserStatus.ACTIVATED);
+			}
+			user.setPassword(request.getNewPsw());
+			save(user);
+		}
+	}
+
+	private boolean isPswChangeble(ChangePswRequest request, UserDto user) {
+		boolean isOldPswOk = pswEncoder.matches(request.getOldPsw(), user.getPassword());
+		boolean isNewPswLongEnough = request.getNewPsw().length() >= 8;
+		boolean areNewPswsTheSame = request.getNewPsw().equals(request.getNewPswAgain());
+		boolean isPswChangeble = isOldPswOk && isNewPswLongEnough && areNewPswsTheSame;
+		return isPswChangeble;
+	}
+	
+	
+
+	public void generateAndSendRegistrationEmailWithNewPassword(int userId) {
+		UserDto user = getById(userId);
+		user.setStatus(UserStatus.PENDING);
+		user.setPassword(generateNewPassword());
+		save(user);
+		try {
+			sendRegisterEmail(user.getEmail(), generateRegisterEmailBody(user), user);
+		} catch (MessagingException e) {
+			System.out.println("Valahol hiba van a generálás/küldésben.");
+			e.printStackTrace();
+		}
+	}
+
+	public String generateRegisterEmailBody(UserDto user) {
+		String emailBody = new String();
+		emailBody = "Kedves " + user.getName() + "! \r\n \r\nÖnt beregisztrálták a filmklubszov.hu oldalra ";
+		emailBody = emailBody + user.getRole() + " szerepkörben. \r\nA generált jelszava: " + user.getPassword() + ". ";
+		emailBody = emailBody + "Ezt az első belépést követően feltétlenül meg kell változtatnia.";
+		emailBody = emailBody + "\r\n \r\nÜdvözlettel: a filmkluszov.hu csapata";
+		System.out.println(emailBody);
+		return emailBody;
+	}
+
+	//@SuppressWarnings("static-access")
+	public void sendRegisterEmail(String email, String emailBody, UserDto user) throws MessagingException {
+		/*
+		MimeMessage generatedMessage = gmailUtils.createEmail(user.getEmail(), "magyarfilmklubszovetseg@gmail.com", "filmklubszov.hu regisztráció", emailBody);
+		
+		try {
+			gmailUtils.sendMessage(generatedMessage);
+		} catch (IOException e) {
+			System.out.println("Couldn't send the mail." + e.getMessage());
+		}
+		*/
+		String senderMail = "magyarfilmklubszovetseg@gmail.com";
+		String password = "filmklub2020";
+
+		Properties props = new Properties();
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.host", "smtp.gmail.com");
+		props.put("mail.smtp.port", "587");
+
+		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(senderMail, password);
+			}
+		});
+
+		try {
+
+			MimeMessage message = new MimeMessage(session);
+			message.setFrom(new InternetAddress("nagy.anasztazia@gmail.com"));
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
+			message.setSubject("filmklubszov.hu regisztráció");
+			message.setText(emailBody);
+			
+			//Message messageWithEmail = gmailUtils.createMessageWithEmail(message);
+
+			Transport.send(message);
+
+			System.out.println("Done");
+
+		} catch (MessagingException e) {
+			throw new RuntimeException(e);
+		}
+		
+	}
+
+
 }

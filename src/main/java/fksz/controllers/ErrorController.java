@@ -14,17 +14,17 @@ import fksz.home.view.support.LocalizationUrlBuilder;
 import fksz.i18n.service.LocalizationService;
 
 @Controller
-@RequestMapping("/example")
-public class ExampleController extends MasterController{
+@RequestMapping("/common_error")
+public class ErrorController extends MasterController{
 
-	public ExampleController(LocalizationService localizationService, AuthenticationService authenticationService, LocalizationUrlBuilder localizationUrlBuilder) {
+	public ErrorController(LocalizationService localizationService, AuthenticationService authenticationService, LocalizationUrlBuilder localizationUrlBuilder) {
 		super(localizationService, authenticationService, localizationUrlBuilder);
 	}
 
 	@RequestMapping(method=RequestMethod.GET)
-	public String example(@ModelAttribute("loginRequest") LoginRequest loginRequest, BindingResult bindingResult, HttpSession httpSession) {
+	public String error(@ModelAttribute("loginRequest") LoginRequest loginRequest, BindingResult bindingResult, HttpSession httpSession) {
 		AuthenticationService.isLoginOk(bindingResult, httpSession);
-		return "example";
+		return "common_error";
 	}
 
 }

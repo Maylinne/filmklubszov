@@ -1,4 +1,4 @@
-package fksz.driveapi;
+package fksz.googletools;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -20,10 +20,11 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.DriveScopes;
+import com.google.api.services.gmail.Gmail;
 
 public class GoogleDriveUtils {
 	 
-	public static final String APPLICATION_NAME = "Google Drive API Java Quickstart";
+	public static final String APPLICATION_NAME = "filmklubszov";
  
     public static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
  
@@ -42,6 +43,7 @@ public class GoogleDriveUtils {
     private static HttpTransport HTTP_TRANSPORT;
  
     private static Drive _driveService;
+    private static Gmail _gmailService;
  
     static {
         try {
@@ -84,6 +86,17 @@ public class GoogleDriveUtils {
         _driveService = new Drive.Builder(HTTP_TRANSPORT, JSON_FACTORY, credential) //
                 .setApplicationName(APPLICATION_NAME).build();
         return _driveService;
+    }
+    
+    public static Gmail getGmailService() throws IOException {
+    	
+		if (_gmailService != null) {
+            return _gmailService;
+        }
+        Credential credential = getCredentials();
+        
+        _gmailService = new Gmail.Builder(HTTP_TRANSPORT, JSON_FACTORY, credential).setApplicationName(APPLICATION_NAME).build();
+        return _gmailService;
     }
  
 }

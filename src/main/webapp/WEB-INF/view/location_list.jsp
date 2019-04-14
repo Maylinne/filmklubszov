@@ -16,61 +16,71 @@
 				<div class="box">
 
 					<div class="table-responsive">
-						<table class="table">
+						<table class="table locationTable">
 							<thead>
 								<tr>
 									<th colspan="2">Név</th>
 									<th>Város</th>
 									<th colspan="2">Cim</th>
-									<th style="width: 120px"><a href="#" data-toggle="modal" data-target="#addLocation_modal"><i class="fa fa-plus-square fa-2x"></i><span class="addButtonText">Helyszin</span></a></th>
+									<th style="width: 120px"><a href="#" data-toggle="modal"
+										data-target="#addLocation_modal"><i
+											class="fa fa-plus-square fa-2x"></i><span
+											class="addButtonText">Helyszin</span></a></th>
 								</tr>
 							</thead>
 							<tbody>
 
 								<c:forEach var="locationModel" items="${locationModels}">
-									<tr>
-										<td><span class="expandButton"> <i class="fa fa-angle-down fa-2x"> </i></span></td>
+									<tr data-locationId="${locationModel.id}">
+										<td>
+											<span class="expandButton"> 
+												<i class="fa fa-angle-down fa-2x"></i>
+											</span>
+										</td>
 										<td><h5>
 												<c:out value="${locationModel.name}"></c:out>
 											</h5></td>
 										<td><c:out value="${locationModel.city}"></c:out></td>
 										<td colspan="2"><c:out value="${locationModel.address}"></c:out></td>
-										<td>
-											<span class="listAction deleteLocation"><i class="fa fa-trash-o"></i></span>
-											<span class="listAction editLocation"><i class="fa fa-edit"></i></span>
+										<td><span class="listAction deleteLocation"><i class="fa fa-trash-o"></i></span>
+										<span class="listAction editLocation"><i class="fa fa-edit"></i></span>
 										</td>
 									</tr>
 
 
 									<tr class="subTableRow" data-locationId="${locationModel.id}">
-									<td></td>
+										<td></td>
 										<td colspan="5">
-												<table class="table">
-													<thead>
-														<tr>
-															<th colspan="2">Név</th>
-															<th>Férőhelyek</th>
-															<th class="spotModal" style="width: 110px"><a href="#" data-toggle="modal" data-target="#addSpot_modal"><i class="fa fa-plus-square fa-2x"></i><span class="addButtonText">Terem</span></a></th>
-														</tr>
-													</thead>
-													<tbody>
-														<c:if test="${not empty locationModel.spots}">
+											<table class="table">
+												<thead>
+													<tr>
+														<th colspan="2">Név</th>
+														<th>Férőhelyek</th>
+														<th class="spotModal" style="width: 110px">
+															<a href="#" data-toggle="modal" data-target="#addSpot_modal">
+																<i class="fa fa-plus-square fa-2x"></i>
+																<span class="addButtonText">Terem</span>
+															</a>
+														</th>
+													</tr>
+												</thead>
+												<tbody>
+													<c:if test="${not empty locationModel.spots}">
 														<c:forEach var="spotModel" items="${locationModel.spots}">
-														<tr>
-															
-															<td colspan="2"><c:out value="${spotModel.name}"></c:out></td>
-															<td><c:out value="${spotModel.places}"></c:out></td>
-															
-														
-															
-														</tr>
-
+															<tr data-spotId="${spotModel.id}">
+																<td colspan="2"><c:out value="${spotModel.name}"></c:out></td>
+																<td><c:out value="${spotModel.places}"></c:out></td>
+																<td>
+																	<span class="listAction deleteSpot"><i class="fa fa-trash-o"></i></span> 
+																	<span class="listAction editSpot"><i class="fa fa-edit"></i></span>
+																</td>
+															</tr>
 
 														</c:forEach>
-														</c:if>
-													</tbody>
-												</table>
-											</td>
+													</c:if>
+												</tbody>
+											</table>
+										</td>
 									</tr>
 
 
@@ -90,64 +100,77 @@
 			</div>
 
 		</div>
-		
-		<div class="modal fade" id="addLocation_modal" tabindex="-1" role="dialog" aria-labelledby="AddLocation" aria-hidden="true">
-            <div class="modal-dialog modal-sm">
 
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="AddLocation">Helyszin hozzáadása/szerkesztése</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form:form modelAttribute="locationRequest" action="locations/addlocation" method="post">
-                            <div class="form-group">
-                                <form:input path="name" type="text" class="form-control" id="Name" placeholder="Helyszin neve" />
-                            </div>
+		<div class="modal fade" id="addLocation_modal" tabindex="-1"
+			role="dialog" aria-labelledby="AddLocation" aria-hidden="true">
+			<div class="modal-dialog modal-sm">
+
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="AddLocation">Helyszin hozzáadása/szerkesztése</h4>
+					</div>
+					<div class="modal-body">
+						<form:form modelAttribute="locationRequest" action="locations/addlocation" method="post">
+							<form:input path="id" id="Id" type="number" style="display:none"/>
 							<div class="form-group">
-                                <form:input path="city" type="text" class="form-control" id="City" placeholder="Város" />
-                            </div>
-                            <div class="form-group">
-                                <form:input path="address" type="text" class="form-control" id="Address" placeholder="Cim" />
-                            </div>
-
-                            <p class="text-center">
-                                <button type="submit" class="btn btn-template-main"><i class="fa fa-sign-in"></i> Mentés</button>
-                            </p>
-
-                        </form:form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="modal fade" id="addSpot_modal" tabindex="-1" role="dialog" aria-labelledby="AddSpot" aria-hidden="true">
-            <div class="modal-dialog modal-sm">
-
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="AddSpot">Terem hozzáadása/szerkesztése</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form:form modelAttribute="spotRequest" action="locations/addspot" method="post">
-                        	<form:input path="locationId" id="LocationId" type="number" style="display:none"/>
-                            <div class="form-group">
-                                <form:input path="name" type="text" class="form-control" id="Name" placeholder="Terem neve" />
-                            </div>
+								<form:input path="name" type="text" class="form-control"
+									id="Name" placeholder="Helyszin neve" />
+							</div>
 							<div class="form-group">
-                                <form:input path="places" type="number" class="form-control" id="Places" placeholder="Helyek" />
-                            </div>
-                            
-                            <p class="text-center">
-                                <button type="submit" class="btn btn-template-main"><i class="fa fa-sign-in"></i> Mentés</button>
-                            </p>
+								<form:input path="city" type="text" class="form-control"
+									id="City" placeholder="Város" />
+							</div>
+							<div class="form-group">
+								<form:input path="address" type="text" class="form-control"
+									id="Address" placeholder="Cim" />
+							</div>
 
-                        </form:form>
-                    </div>
-                </div>
-            </div>
-        </div>
+							<p class="text-center">
+								<button type="submit" class="btn btn-template-main">
+									<i class="fa fa-sign-in"></i> Mentés
+								</button>
+							</p>
+
+						</form:form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="addSpot_modal" tabindex="-1" role="dialog" aria-labelledby="AddSpot" aria-hidden="true">
+			<div class="modal-dialog modal-sm">
+
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="AddSpot">Terem hozzáadása/szerkesztése</h4>
+					</div>
+					<div class="modal-body">
+						<form:form modelAttribute="spotRequest" action="locations/addspot"
+							method="post">
+							<form:input path="id" id="SpotId" type="number" style="display:none" />
+							<form:input path="locationId" id="LocationId" type="number" style="display:none" />
+							<div class="form-group">
+								<form:input path="name" type="text" class="form-control"
+									id="Name" placeholder="Terem neve" />
+							</div>
+							<div class="form-group">
+								<form:input path="places" type="number" class="form-control"
+									id="Places" placeholder="Helyek" />
+							</div>
+
+							<p class="text-center">
+								<button type="submit" class="btn btn-template-main">
+									<i class="fa fa-sign-in"></i> Mentés
+								</button>
+							</p>
+
+						</form:form>
+					</div>
+				</div>
+			</div>
+		</div>
 
 	</div>
 

@@ -1,4 +1,4 @@
-package fksz.driveapi;
+package fksz.googletools;
 
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
@@ -32,7 +32,7 @@ private static final String APPLICATION_NAME = "Google Drive API Java Quickstart
  
     // Directory to store user credentials for this application.
     private static final java.io.File CREDENTIALS_FOLDER //
-            = new java.io.File("src/main/resources");
+            = new java.io.File("src/main/resources/credentials");
  
     private static final String CLIENT_SECRET_FILE_NAME = "client_secret.json";
  

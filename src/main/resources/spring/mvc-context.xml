@@ -43,9 +43,6 @@
 
   <bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver" />
 
-  <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-    <property name="defaultErrorView" value="common_error" />
-  </bean>
 
 
 </beans>

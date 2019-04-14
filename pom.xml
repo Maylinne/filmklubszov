@@ -194,6 +194,14 @@
 			<version>v3-rev105-1.23.0</version>
 		</dependency>
 
+		<!-- Google gmail API -->
+		<dependency>
+			<groupId>com.google.apis</groupId>
+			<artifactId>google-api-services-gmail</artifactId>
+			<version>v1-rev102-1.25.0</version>
+		</dependency>
+
+
 
 		<!-- https://mvnrepository.com/artifact/com.google.api-client/google-api-client -->
 		<dependency>
@@ -232,11 +240,11 @@
 		</dependency>
 
 		<dependency>
-		    <groupId>org.json</groupId>
-		    <artifactId>json</artifactId>
-		    <version>20180813</version>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20180813</version>
 		</dependency>
-				
+
 
 	</dependencies>
 

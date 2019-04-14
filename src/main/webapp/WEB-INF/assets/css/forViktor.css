@@ -54,5 +54,10 @@
 	margin: 0 5px;
 }
 
+.formElement {
+	display: none;
+}
 
-
+.formElement.active {
+	display: block;
+}

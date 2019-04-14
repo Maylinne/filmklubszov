@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -13,15 +14,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import fksz.authentication.service.AuthenticationService;
 import fksz.authentication.view.model.LoginRequest;
 import fksz.home.view.support.LocalizationUrlBuilder;
 import fksz.i18n.service.LocalizationService;
+import fksz.models.CutModel;
 import fksz.models.FilmMetaModel;
 import fksz.requests.CutRequest;
 import fksz.requests.FilmMetaRequest;
 import fksz.service.CutService;
 import fksz.service.FilmMetaService;
+import fksz.service.OfferService;
 import fksz.transformers.CutTransformer;
 import fksz.transformers.FilmMetaTransformer;
 
@@ -29,17 +35,11 @@ import fksz.transformers.FilmMetaTransformer;
 @RequestMapping("/movies")
 public class MovieController extends MasterController {
 	
-	@Autowired
-	FilmMetaTransformer filmMetaTransformer;
-	
-	@Autowired
-	CutTransformer cutTransformer;
-	
-	@Autowired
-	CutService cutService;
-	
-	@Autowired
-	FilmMetaService filmMetaService;
+	@Autowired FilmMetaTransformer filmMetaTransformer;
+	@Autowired CutTransformer cutTransformer;
+	@Autowired CutService cutService;
+	@Autowired FilmMetaService filmMetaService;
+	@Autowired OfferService offerService;
 
 	public MovieController(LocalizationService localizationService, AuthenticationService authenticationService, LocalizationUrlBuilder localizationUrlBuilder) {
 		super(localizationService, authenticationService, localizationUrlBuilder);
@@ -73,9 +73,54 @@ public class MovieController extends MasterController {
 		return "redirect:/movies";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/deletemoviepost", method=RequestMethod.POST, produces = "application/json")
+	public String deleteFilmMeta (int filmMetaId) {
+		if (!filmMetaService.getById(filmMetaId).getCuts().isEmpty()) {
+			return JSONObject.quote("Torold elobb a filmhez tartozo kopiakat!");
+		} else {
+			filmMetaService.deleteById(filmMetaId);
+			return JSONObject.quote("A film torolve a rendszerbol");
+		}
+	}
+	
+	@RequestMapping(value="/editmoviedialogpost", method=RequestMethod.POST)
+	@ResponseBody
+	public String editFilmMeta (int filmMetaId) throws JsonProcessingException {
+		FilmMetaModel filmMeta = filmMetaTransformer.dtoToModel(filmMetaService.getById(filmMetaId));		
+		ObjectMapper mapper = new ObjectMapper();
+		String jsonFilmMeta = "";
+		if (filmMeta != null) {
+			jsonFilmMeta = mapper.writeValueAsString(filmMeta);
+		}
+		return jsonFilmMeta;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/deletecutpost", method=RequestMethod.POST, produces = "application/json")
+	public String deleteCut (int cutId) {
+		if (!offerService.getAllByCutId(cutId).isEmpty()) {
+			return JSONObject.quote("Elobb torold az ezt a kopiat tartalmazo offereket!");
+		} else {
+			cutService.deleteById(cutId);
+			return JSONObject.quote("A kopia torolve a rendszerbol");
+		}
+	}
+	
+	@RequestMapping(value="/editcutdialogpost", method=RequestMethod.POST)
+	@ResponseBody
+	public String editCut (int cutId) throws JsonProcessingException {
+		CutModel cut = cutTransformer.dtoToModel(cutService.getById(cutId));		
+		ObjectMapper mapper = new ObjectMapper();
+		String jsonCut = "";
+		if (cut != null) {
+			jsonCut = mapper.writeValueAsString(cut);
+		}
+		return jsonCut;
+	}
+	
 	@RequestMapping(value="/getfilmmetabyid", method=RequestMethod.GET, headers="Accept=*/*", produces="application/json")
 	public @ResponseBody FilmMetaModel pay(@RequestParam("id") int id) {
-	
 		FilmMetaModel film = filmMetaTransformer.dtoToModel(filmMetaService.getById(id));
 		return film;
 	}

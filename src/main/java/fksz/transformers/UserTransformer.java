@@ -9,17 +9,18 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import fksz.domain.User;
+import fksz.domain.UserStatus;
 import fksz.dto.UserDto;
 import fksz.models.UserModel;
 import fksz.requests.UserRequest;
 
 @Component
 public class UserTransformer {
-	
+
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
-	
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");	
+
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
 	public UserDto entitytoDto(User entity) {
 		UserDto dto = new UserDto();
@@ -29,25 +30,24 @@ public class UserTransformer {
 		dto.setPassword(entity.getPassword());
 		dto.setGuid(entity.getGuid());
 		dto.setRole(entity.getRole());
-		//dto.setStatus(entity.getStatus());
-		//dto.setLastLogin(entity.getLastLogin());
+		dto.setStatus(entity.getStatus());
+		// dto.setLastLogin(entity.getLastLogin());
 		return dto;
 	}
-	
+
 	public User dtoToEntity(UserDto dto) {
 		User entity = new User();
 		entity.setId(dto.getId());
-		entity.setEmail(dto.getEmail() );
+		entity.setEmail(dto.getEmail());
 		entity.setName(dto.getName());
 		entity.setPassword(passwordEncoder.encode(dto.getPassword()));
 		entity.setGuid(dto.getGuid());
 		entity.setRole(dto.getRole());
-		//entity.setStatus(dto.getStatus());
-		//entity.setLastLogin(dto.getLastLogin());
+		entity.setStatus(dto.getStatus());
+		// entity.setLastLogin(dto.getLastLogin());
 		return entity;
 	}
 
-	
 	public UserModel dtoToModel(UserDto dto) {
 		UserModel model = new UserModel();
 		model.setId(dto.getId());
@@ -56,11 +56,11 @@ public class UserTransformer {
 		model.setPassword(dto.getPassword());
 		model.setGuid(dto.getGuid());
 		model.setRole(dto.getRole());
-		//model.setStatus(dto.getStatus().toString());
-		//model.setLastLogin(dto.getLastLogin().format(formatter));
+		model.setStatus(dto.getStatus().toString());
+		// model.setLastLogin(dto.getLastLogin().format(formatter));
 		return model;
 	}
-	
+
 	public UserDto requestToDto(UserRequest request) {
 		UserDto dto = new UserDto();
 		dto.setId(request.getId());
@@ -69,8 +69,8 @@ public class UserTransformer {
 		dto.setPassword(request.getPassword());
 		dto.setGuid(request.getGuid());
 		dto.setRole(request.getRole());
-		//dto.setStatus(UserStatus.valueOf(request.getStatus()));
-		//dto.setLastLogin(LocalDateTime.parse(request.getLastLogin(), formatter));
+		dto.setStatus(UserStatus.valueOf(request.getStatus()));
+		// dto.setLastLogin(LocalDateTime.parse(request.getLastLogin(), formatter));
 		return dto;
 	}
 
@@ -97,7 +97,5 @@ public class UserTransformer {
 		}
 		return models;
 	}
-
-	
 
 }

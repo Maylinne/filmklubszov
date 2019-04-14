@@ -16,24 +16,27 @@
 				<div class="box">
 
 					<div class="table-responsive">
-						<table class="table">
+						<table class="table userTable">
 							<thead>
 								<tr>
 									<th colspan="2">Felhasználónév</th>
 									<th colspan="2">E-mail</th>
 									<th>Szerepkör</th>
+									<th>Státusz</th>
 									<th style="width: 140px"><a href="#" data-toggle="modal" data-target="#addUser_modal"><i class="fa fa-plus-square fa-2x"></i><span class="addButtonText">Felhasználó</span></a></th>
 								</tr>
 							</thead>
 							
 							<tbody>
 								<c:forEach var="userModel" items="${userModels}">
-									<tr data-userId="${userModel.id}">
+									<tr class="userRow" data-userId="${userModel.id}">
 										<td colspan="2"><h5>
 												<c:out value="${userModel.name}"></c:out>
 											</h5>
 										</td>
 										<td colspan="2"><c:out value="${userModel.email}"></c:out></td>
+										<td><c:out value="${userModel.role}"></c:out></td>
+										<td><c:out value="${userModel.status}"></c:out></td>
 										<td>
 											<span class="listAction sendEmail"><i class="fa fa-envelope"></i></span>
 											<span class="listAction deleteUser"><i class="fa fa-trash-o"></i></span>

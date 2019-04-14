@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fksz.dao.FilmMetaDao;
+import fksz.domain.FilmMeta;
 import fksz.dto.FilmMetaDto;
 import fksz.transformers.FilmMetaTransformer;
 
@@ -37,10 +38,12 @@ public class FilmMetaService {
 	public FilmMetaDto getById(Integer id) {
 		return transformer.entityToDto(dao.findById(id)) ;
 	}
+	public FilmMeta getByIdForEntity(int id) {
+		return dao.findById(id);
+	}
 
 	public List<FilmMetaDto> getAll() {
 		return transformer.entitiesToDtos(dao.findAll());
-		
 	}
 	
 	

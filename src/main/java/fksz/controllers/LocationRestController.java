@@ -5,8 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import fksz.authentication.service.AuthenticationService;
@@ -20,8 +18,8 @@ import fksz.service.SpotService;
 import fksz.transformers.LocationTransformer;
 import fksz.transformers.SpotTransformer;
 
+@RequestMapping("/restlocations")
 @RestController
-@RequestMapping("/restlocation")
 public class LocationRestController extends MasterController {
 	
 	@Autowired
@@ -50,9 +48,7 @@ public class LocationRestController extends MasterController {
 		return new SpotRequest();
 	}
 	
-	@ModelAttribute("locationModels")
-	@RequestMapping(method=RequestMethod.GET, produces = "application/json", headers = {"Content-type=text/json"})
-	@ResponseBody
+	@RequestMapping("/getalllocations")
 	public List<LocationModel> getAllLocations() {
 		List<LocationModel> locations = locationTransformer.dtosToModels(locationService.getAll());
 		return locations;
