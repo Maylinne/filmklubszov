@@ -1,16 +1,10 @@
 package fksz.domain;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Offer {
-
-	@Id
-	@GeneratedValue
-	private int id;
+public class Offer extends BaseEntity {
 
 	@ManyToOne
 	private User partner;
@@ -24,14 +18,6 @@ public class Offer {
 	private String description;
 
 	public Offer() {
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public User getPartner() {

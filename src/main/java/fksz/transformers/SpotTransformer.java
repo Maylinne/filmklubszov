@@ -1,11 +1,15 @@
 package fksz.transformers;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import fksz.authentication.service.AuthenticationService;
+import fksz.dao.SpotDao;
+import fksz.dao.UserDao;
 import fksz.domain.Spot;
 import fksz.dto.SpotDto;
 import fksz.models.SpotModel;
@@ -20,11 +24,29 @@ public class SpotTransformer {
 
 	@Autowired
 	LocationService locationService;
+	
+	@Autowired
+	AuthenticationService authService;
+	
+	@Autowired
+	SpotDao dao;
 
 	public Spot dtoToEntity(SpotDto dto, boolean lazy) {
 		if (dto != null) {
 
 			Spot entity = new Spot();
+			
+			if (dto.getId() == 0) {
+				entity.setCreatedById(authService.getPrincipalId());
+				entity.setCreationTime(LocalDateTime.now());
+			} else {
+				entity.setCreatedById(dao.findById(dto.getId()).getCreatedById());
+				entity.setCreationTime(dao.findById(dto.getId()).getCreationTime());
+			}
+			
+			entity.setLastModifiedId(authService.getPrincipalId());
+			entity.setLastModifiedTime(LocalDateTime.now());
+			
 			entity.setId(dto.getId());
 			entity.setName(dto.getName());
 			entity.setPlaces(dto.getPlaces());

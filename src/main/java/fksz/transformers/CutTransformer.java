@@ -1,11 +1,14 @@
 package fksz.transformers;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import fksz.authentication.service.AuthenticationService;
+import fksz.dao.CutDao;
 import fksz.domain.Cut;
 import fksz.dto.CutDto;
 import fksz.models.CutModel;
@@ -20,12 +23,24 @@ public class CutTransformer {
 
 	@Autowired
 	FilmMetaTransformer filmMetaTransformer;
+	@Autowired
+	CutDao dao;
+	
+	@Autowired
+	AuthenticationService authService;
 
 	public Cut dtoToEntity(CutDto dto, boolean lazy) {
 		if (dto != null) {
 		
 		Cut entity = new Cut();
 		
+		if (dto.getCutId() == 0) {
+			entity.setCreatedById(authService.getPrincipalId());
+			entity.setCreationTime(LocalDateTime.now());
+		} else {
+			entity.setCreatedById(dao.findById(dto.getCutId()).getCreatedById());
+			entity.setCreationTime(dao.findById(dto.getCutId()).getCreationTime());
+		}
 		entity.setId(dto.getCutId());
 		entity.setTitle(dto.getTitle());
 		entity.setHungarianTitle(dto.getHungarianTitle());
@@ -37,6 +52,9 @@ public class CutTransformer {
 		if (!lazy) {
 			entity.setFilmMeta(filmMetaService.getByIdForEntity(dto.getFilmMetaId()));
 		}
+		entity.setLastModifiedId(authService.getPrincipalId());
+		entity.setLastModifiedTime(LocalDateTime.now());
+	
 		return entity;
 		} else return null;
 	}

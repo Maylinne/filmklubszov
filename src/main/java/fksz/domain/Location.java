@@ -4,16 +4,10 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Location {
-	
-	@Id
-	@GeneratedValue
-	private int id;
+public class Location extends BaseEntity{
 	
 	private String name;
 	private String city;
@@ -25,23 +19,14 @@ public class Location {
 	private String description;
 	
 	public Location() {}
-	
-	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
+
 	public String getName() {
 		return name;
 	}
 
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
 
 	public String getCity() {
 		return city;

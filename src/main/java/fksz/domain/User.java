@@ -4,16 +4,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class User {
+public class User extends BaseEntity {
 	
-	@Id
-	@GeneratedValue
-	private int id;
 	private String email;
 	private String name;
 	private String role;
@@ -26,13 +21,7 @@ public class User {
 	private List<Offer> offers;
 	
 	public User () {}
-	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
+
 	public String getEmail() {
 		return email;
 	}

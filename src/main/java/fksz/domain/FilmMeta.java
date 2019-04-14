@@ -4,17 +4,11 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class FilmMeta {
-	
-	@Id
-	@GeneratedValue
-	private int id;
-	
+public class FilmMeta extends BaseEntity{
+
 	private String title;
 	private String hungarianTitle;
 	private String director;
@@ -23,15 +17,7 @@ public class FilmMeta {
 	private List<Cut> cuts;
 
 	public FilmMeta() {}
-	
-	public int getId() {
-		return id;
-	}
-	
-	public void setId(int id) {
-		this.id = id;
-	}
-	
+
 	public String getTitle() {
 		return title;
 	}

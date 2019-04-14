@@ -1,5 +1,6 @@
 package fksz.transformers;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import fksz.authentication.service.AuthenticationService;
+import fksz.dao.UserDao;
 import fksz.domain.User;
 import fksz.domain.UserStatus;
 import fksz.dto.UserDto;
@@ -19,11 +22,18 @@ public class UserTransformer {
 
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
+	
+	@Autowired
+	AuthenticationService authService;
+	
+	@Autowired
+	UserDao dao;
 
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
 	public UserDto entitytoDto(User entity) {
 		UserDto dto = new UserDto();
+		
 		dto.setId(entity.getId());
 		dto.setEmail(entity.getEmail());
 		dto.setName(entity.getName());
@@ -37,6 +47,17 @@ public class UserTransformer {
 
 	public User dtoToEntity(UserDto dto) {
 		User entity = new User();
+		
+		if (dto.getId() == 0) {
+			entity.setCreatedById(authService.getPrincipalId());
+			entity.setCreationTime(LocalDateTime.now());
+		} else {
+			entity.setCreatedById(dao.findById(dto.getId()).getCreatedById());
+			entity.setCreationTime(dao.findById(dto.getId()).getCreationTime());
+		}
+		
+		entity.setLastModifiedId(authService.getPrincipalId());
+		entity.setLastModifiedTime(LocalDateTime.now());
 		entity.setId(dto.getId());
 		entity.setEmail(dto.getEmail());
 		entity.setName(dto.getName());

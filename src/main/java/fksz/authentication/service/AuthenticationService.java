@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -11,8 +12,14 @@ import org.springframework.security.web.WebAttributes;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
+import fksz.service.UserService;
+
 @Service
 public class AuthenticationService {
+	
+	@Autowired
+	UserService userService;
+	
 	public boolean isUserAuthenticated() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		return authentication != null && authentication.isAuthenticated();
@@ -36,6 +43,12 @@ public class AuthenticationService {
 			}
 		}
 		return result;
+	}
+	
+	public int getPrincipalId() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String userName = authentication.getName();
+		return userService.getByName(userName).getId();
 	}
 	
 	public static void isLoginOk(BindingResult bindingResult, HttpSession httpSession) {

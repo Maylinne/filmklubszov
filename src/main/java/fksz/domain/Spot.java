@@ -4,17 +4,12 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Spot {
+public class Spot extends BaseEntity{
 	
-	@Id
-	@GeneratedValue
-	private int id;
 	private String name;
 	private int places;
 	
@@ -26,13 +21,7 @@ public class Spot {
 	private List<Offer> offers;
 	
 	public Spot() {}
-	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
+
 	public String getName() {
 		return name;
 	}
