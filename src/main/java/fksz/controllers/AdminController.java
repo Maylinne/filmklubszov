@@ -24,7 +24,7 @@ public class AdminController extends MasterController {
 
 	@RequestMapping(value=REQUEST_MAPPING, method=RequestMethod.GET)
 	public String admin(@ModelAttribute("loginRequest") LoginRequest loginRequest, BindingResult bindingResult, HttpSession httpSession) {
-		AuthenticationService.isLoginOk(bindingResult, httpSession);
+		authenticationService.isLoginOk(bindingResult, httpSession);
 		return "admin";
 	}
 }

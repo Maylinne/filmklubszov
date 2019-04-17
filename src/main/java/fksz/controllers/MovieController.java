@@ -127,8 +127,10 @@ public class MovieController extends MasterController {
 
 	@RequestMapping(method=RequestMethod.GET)
 	public String example(@ModelAttribute("loginRequest") LoginRequest loginRequest, BindingResult bindingResult, HttpSession httpSession) {
-		AuthenticationService.isLoginOk(bindingResult, httpSession);
-		return "film_list";
+		authenticationService.isLoginOk(bindingResult, httpSession);
+		if (authenticationService.getPrincipalStatus() != "ACTIVATED") {
+			return "redirect:/profile";
+		} else return "film_list";
 	}
 
 }

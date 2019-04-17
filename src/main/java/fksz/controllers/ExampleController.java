@@ -23,7 +23,7 @@ public class ExampleController extends MasterController{
 
 	@RequestMapping(method=RequestMethod.GET)
 	public String example(@ModelAttribute("loginRequest") LoginRequest loginRequest, BindingResult bindingResult, HttpSession httpSession) {
-		AuthenticationService.isLoginOk(bindingResult, httpSession);
+		authenticationService.isLoginOk(bindingResult, httpSession);
 		return "example";
 	}
 

@@ -1,6 +1,10 @@
 <%@tag description="Simple Wrapper Tag" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<c:set var="req" value="${pageContext.request}" />
+<c:set var="uri" value="${req.requestURI}" />
+<c:set var="url">${req.requestURL}</c:set>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,6 +13,7 @@
 <meta name="robots" content="all,follow">
 <meta name="googlebot" content="index,follow,snippet,archive">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<base href="${fn:substring(url, 0, fn:length(url) - fn:length(uri))}${req.contextPath}/" />
 
 <title>A Filmklub Szövetség hivatalos oldala</title>
 
@@ -22,17 +27,14 @@
 	rel="stylesheet">
 
 <!-- Bootstrap and Font Awesome css -->
-<link rel="stylesheet"
-	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
 <!-- Css animations  -->
 <link href="<c:url value="assets/css/animate.css" />" rel="stylesheet">
 
 <!-- Theme stylesheet, if possible do not edit this stylesheet -->
-<link href="<c:url value="assets/css/style.default.css" />"
-	rel="stylesheet" id="theme-stylesheet">
+<link href="<c:url value="assets/css/style.default.css" />" rel="stylesheet" id="theme-stylesheet">
 
 <!-- Custom stylesheet - for your changes -->
 <link href="<c:url value="assets/css/custom.css" />" rel="stylesheet">
@@ -91,7 +93,7 @@ _________________________________________________________ -->
 						<div class="col-xs-7">
 							<div class="authentication login">
 								<c:if test="${not empty homepageModel.loginUrl}">
-									<a href="#" data-toggle="modal" data-target="#login-modal" />
+									<a href="#" data-toggle="modal" data-target="#login-modal">
 									<i class="fa fa-sign-in"></i>
 									<span class="hidden-xs text-uppercase">Bejelentkezés</span>
 									</a>
@@ -125,8 +127,7 @@ _________________________________________________________ -->
 						<div class="navbar-header">
 
 							<a class="navbar-brand home" href="">
-								<div
-									style="font-family: 'Pacifico', serif; font-size: 39px; margin-top: 10px">filmklubszovetseg.hu</div>
+								<div style="font-family: 'Pacifico', serif; font-size: 39px; margin-top: 10px">filmklubszovetseg.hu</div>
 							</a>
 							<div class="navbar-buttons">
 								<button type="button" class="navbar-toggle btn-template-main"
@@ -255,10 +256,9 @@ _________________________________________________________ -->
 								</c:if>
 
 								<c:if test="${not empty homepageModel.adminUrl}">
-									<li class="dropdown use-yamm yamm-fw"><a href="#"
-										class="dropdown-toggle" data-toggle="dropdown"
-										data-hover="dropdown" data-delay="200"> Admind <b
-											class="caret"></b>
+									<li class="dropdown use-yamm yamm-fw">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200"> 
+										Admind <b class="caret"></b>
 									</a>
 										<ul class="dropdown-menu">
 											<li>
@@ -462,6 +462,26 @@ _________________________________________________________ -->
 	</div>
 	<!-- /#all -->
 
+
+		<div class="modal fade" id="confirmation_modal" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 id="confirm-title"></h4>
+					</div>
+					<div class="modal-body">
+						<p id="confirm-info"></p>
+						<div class="confirm-modal-buttons">
+							<button type="button" id="confirm-yes" data-dismiss="modal" class="btn btn-template-main">Igen</button>
+							<button type="button" id="confirm-no" data-dismiss="modal" class="btn btn-template-main">Nem</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
 	<!-- #### JAVASCRIPT FILES ### -->
 
 	<script
@@ -484,7 +504,6 @@ _________________________________________________________ -->
 
 	<!-- owl carousel -->
 	<script src="<c:url value='assets/js/owl.carousel.min.js' />"></script>
-
 
 </body>
 </html>

@@ -61,3 +61,16 @@
 .formElement.active {
 	display: block;
 }
+
+.flex-group {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-label {
+    width: auto;
+    text-align: center;
+    border-right: none;
+    color: white;
+    background-color: #38a7bb;
+}

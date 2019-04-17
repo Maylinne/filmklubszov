@@ -34,20 +34,11 @@ import fksz.transformers.SpotTransformer;
 @RequestMapping("/locations")
 public class LocationController extends MasterController {
 	
-	@Autowired
-	LocationService locationService;
-	
-	@Autowired
-	LocationTransformer locationTransformer;
-	
-	@Autowired
-	SpotService spotService;
-	
-	@Autowired
-	SpotTransformer spotTransformer;
-	
-	@Autowired
-	OfferService offerSevice;
+	@Autowired LocationService locationService;
+	@Autowired LocationTransformer locationTransformer;
+	@Autowired SpotService spotService;
+	@Autowired SpotTransformer spotTransformer;
+	@Autowired OfferService offerSevice;
 	
 	public LocationController(LocalizationService localizationService, AuthenticationService authenticationService, LocalizationUrlBuilder localizationUrlBuilder) {
 		super(localizationService, authenticationService, localizationUrlBuilder);
@@ -131,8 +122,10 @@ public class LocationController extends MasterController {
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public String addLocation(@ModelAttribute("loginRequest") LoginRequest loginRequest, BindingResult bindingResult, HttpSession httpSession) {
-		AuthenticationService.isLoginOk(bindingResult, httpSession);
-		return "location_list";
+		authenticationService.isLoginOk(bindingResult, httpSession);
+		if (authenticationService.getPrincipalStatus() != "ACTIVATED") {
+			return "redirect:/profile";
+		} else return "location_list";
 	}
 	
 	

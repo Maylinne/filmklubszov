@@ -2,6 +2,7 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 
 <t:master>
@@ -42,8 +43,11 @@
 											</h5></td>
 										<td><c:out value="${locationModel.city}"></c:out></td>
 										<td colspan="2"><c:out value="${locationModel.address}"></c:out></td>
-										<td><span class="listAction deleteLocation"><i class="fa fa-trash-o"></i></span>
-										<span class="listAction editLocation"><i class="fa fa-edit"></i></span>
+										<td>
+										<security:authorize access="hasRole('ROLE_ADMIN')">
+											<span class="listAction deleteLocation"><i class="fa fa-trash-o"></i></span>
+											<span class="listAction editLocation"><i class="fa fa-edit"></i></span>
+										</security:authorize>
 										</td>
 									</tr>
 
@@ -71,8 +75,10 @@
 																<td colspan="2"><c:out value="${spotModel.name}"></c:out></td>
 																<td><c:out value="${spotModel.places}"></c:out></td>
 																<td>
-																	<span class="listAction deleteSpot"><i class="fa fa-trash-o"></i></span> 
-																	<span class="listAction editSpot"><i class="fa fa-edit"></i></span>
+																	<security:authorize access="hasRole('ROLE_ADMIN')">
+																		<span class="listAction deleteSpot"><i class="fa fa-trash-o"></i></span> 
+																		<span class="listAction editSpot"><i class="fa fa-edit"></i></span>
+																	</security:authorize>
 																</td>
 															</tr>
 
@@ -152,12 +158,11 @@
 							<form:input path="id" id="SpotId" type="number" style="display:none" />
 							<form:input path="locationId" id="LocationId" type="number" style="display:none" />
 							<div class="form-group">
-								<form:input path="name" type="text" class="form-control"
-									id="Name" placeholder="Terem neve" />
+								<form:input path="name" type="text" class="form-control" id="Name" placeholder="Terem neve" />
 							</div>
-							<div class="form-group">
-								<form:input path="places" type="number" class="form-control"
-									id="Places" placeholder="Helyek" />
+							<div class="form-group flex-group">
+								<span class="flex-label form-control">Férőhelyek</span>
+								<form:input path="places" type="number" class="form-control" id="Places" placeholder="Helyek" />
 							</div>
 
 							<p class="text-center">

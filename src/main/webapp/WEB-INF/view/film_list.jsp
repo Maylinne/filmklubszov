@@ -2,6 +2,7 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 
 <t:master>
@@ -38,8 +39,11 @@
 													value="${filmMetaModel.title} (${filmMetaModel.hungarianTitle})"></c:out>
 											</h5></td>
 										<td colspan="2"><c:out value="${filmMetaModel.director}"></c:out></td>
-										<td><span class="listAction deleteFilm"><i class="fa fa-trash-o"></i></span> 
+										<td>
+										<security:authorize access="hasRole('ROLE_ADMIN')">
+											<span class="listAction deleteFilm"><i class="fa fa-trash-o"></i></span> 
 											<span class="listAction editFilm"><i class="fa fa-edit"></i></span>
+										</security:authorize>
 										</td>
 									</tr>
 
@@ -68,8 +72,10 @@
 																<td><c:out value="${cutModel.year}"></c:out></td>
 																<td><c:out value="${cutModel.length}"></c:out></td>
 																<td>
-																	<span class="listAction deleteCut"><i class="fa fa-trash-o"></i></span> 
-																	<span class="listAction editCut"><i class="fa fa-edit"></i></span>
+																	<security:authorize access="hasRole('ROLE_ADMIN')">
+																		<span class="listAction deleteCut"><i class="fa fa-trash-o"></i></span> 
+																		<span class="listAction editCut"><i class="fa fa-edit"></i></span>
+																	</security:authorize>
 																</td>
 															</tr>
 														</c:forEach>

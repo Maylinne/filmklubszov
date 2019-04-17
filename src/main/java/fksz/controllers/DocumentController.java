@@ -61,7 +61,7 @@ public class DocumentController extends MasterController {
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public String documents(@ModelAttribute("loginRequest") LoginRequest loginRequest, BindingResult bindingResult, HttpSession httpSession) {
-		AuthenticationService.isLoginOk(bindingResult, httpSession);
+		authenticationService.isLoginOk(bindingResult, httpSession);
 		return "documents";
 	}
 

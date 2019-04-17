@@ -75,7 +75,6 @@ public class UserController extends MasterController{
 		userService.deleteById(userId);
 		return JSONObject.quote("A felhasznalo torolve a rendszerbol");
 		}
-		
 	}
 	
 	@RequestMapping(value="/edituserdialogpost", method=RequestMethod.POST)
@@ -98,8 +97,10 @@ public class UserController extends MasterController{
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public String example(@ModelAttribute("loginRequest") LoginRequest loginRequest, BindingResult bindingResult, HttpSession httpSession) {
-		AuthenticationService.isLoginOk(bindingResult, httpSession);
-		return "user_list";
+		authenticationService.isLoginOk(bindingResult, httpSession);
+		if (authenticationService.getPrincipalStatus() != "ACTIVATED") {
+			return "redirect:/profile";
+		} else return "user_list";
 	}
 
 }

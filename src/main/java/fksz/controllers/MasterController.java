@@ -73,7 +73,7 @@ public class MasterController {
 	
 	
 	public void homepage(@ModelAttribute("loginRequest") LoginRequest loginRequest, BindingResult bindingResult, HttpSession httpSession) {
-		AuthenticationService.isLoginOk(bindingResult, httpSession);
+		authenticationService.isLoginOk(bindingResult, httpSession);
 	}
 
 }

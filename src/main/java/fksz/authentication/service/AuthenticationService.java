@@ -46,12 +46,26 @@ public class AuthenticationService {
 	}
 	
 	public int getPrincipalId() {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String userName = authentication.getName();
-		return userService.getByName(userName).getId();
+		return userService.getByName(getPrincipalName()).getId();
 	}
 	
-	public static void isLoginOk(BindingResult bindingResult, HttpSession httpSession) {
+	public String getPrincipalStatus() {
+		String principalStatus = userService.getByName(getPrincipalName()).getStatus().toString();
+		return principalStatus;
+	}
+	
+	public String isPrincipalActivated(String redirectMap) {
+		return getPrincipalStatus() == "ACTIVATED" ? redirectMap : "redirect:/profile";
+	}
+
+	private String getPrincipalName() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		return authentication.getName();
+	}
+	
+
+	
+	public void isLoginOk(BindingResult bindingResult, HttpSession httpSession) {
 		Throwable authException = (Throwable) httpSession.getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
 		if (authException != null) {
 			bindingResult.reject(authException.getMessage(), authException.getMessage());

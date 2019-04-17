@@ -23,17 +23,20 @@ var _formForViktor = undefined;
 				$(".offerTable").on("click", ".deleteOffer", function() {
 					var offerId = $(this).closest("tr").attr("data-offerId");
 					var loc = window.location.href;
-					$.ajax({
-						method : "POST",
-						url : "offers/deleteofferpost",
-						data : {
-							offerId : offerId
-						},
-						success : function(result) {
-							if(result != "") alert(result);
-							else window.location.href = loc;
-						}
+					_dialogHelper.ShowConfirmation("Törlés megerősitése", "Biztos, hogy törölni akarod az ajánlatot?", function(){
+						$.ajax({
+							method : "POST",
+							url : "offers/deleteofferpost",
+							data : {
+								offerId : offerId
+							},
+							success : function(result) {
+								if(result != "") alert(result);
+								else window.location.href = loc;
+							}
+						});
 					});
+					
 				})
 				
 				$(".locationTable").on("click", ".deleteLocation", function() {
@@ -383,3 +386,40 @@ var _formForViktor = undefined;
 	};
 
 })(_formForViktor || (_formForViktor = {}));
+
+
+
+
+var _dialogHelper = undefined;
+
+(function (module) {
+	module.dialog = undefined;
+	
+	$(document).ready(function() {
+		module.dialog = $("#confirmation_modal");
+		
+		$("#confirmation_modal").on('hidden.bs.modal', function (e) {
+			module.resetDialog();
+		});
+	})
+	
+	module.resetDialog = function() {
+		$("#confirm-title", module.dialog).html("");
+		$("#confirm-info", module.dialog).html("");
+		$("#confirm-yes", module.dialog).unbind("click");
+	}
+	
+	module.ShowConfirmation = function(title, description, callback) {
+		
+		
+		$("#confirm-title", module.dialog).html(title);
+		$("#confirm-info", module.dialog).html(description);
+		
+		module.dialog.modal("show");
+		
+		$("#confirm-yes").on("click", module.dialog, function (){
+			if(callback) callback();
+		});
+	}
+
+}) (_dialogHelper || (_dialogHelper = {}));

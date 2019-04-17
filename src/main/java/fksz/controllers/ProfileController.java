@@ -53,7 +53,7 @@ public class ProfileController extends MasterController{
 
 	@RequestMapping(method=RequestMethod.GET)
 	public String profile(@ModelAttribute("loginRequest") LoginRequest loginRequest, BindingResult bindingResult, HttpSession httpSession) {
-		AuthenticationService.isLoginOk(bindingResult, httpSession);
+		authenticationService.isLoginOk(bindingResult, httpSession);
 		return "profile";
 	}
 

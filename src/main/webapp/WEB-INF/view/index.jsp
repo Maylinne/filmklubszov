@@ -3,12 +3,21 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 
 <t:master>
+	<!-- To check the role. Dev purposes -->
+	<security:authorize access="hasRole('ROLE_VENDOR')">
+		This text is only visible to a vendor <br/>
+	</security:authorize>
+	<security:authorize access="hasRole('ROLE_ADMIN')">
+		This text is only visible to an admin <br/>
+	</security:authorize>
 
         <section class="bar background-pentagon">
                 <div class="container">
+                
                     <div class="row showcase">
                         <div class="col-md-3 col-sm-6">
                             <div class="item">
