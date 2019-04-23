@@ -99,9 +99,10 @@ public class UserService implements UserDetailsService {
 		return newPassword;
 	}
 
-	public void changeUserPassword(ChangePswRequest request) {
+	public String changeUserPassword(ChangePswRequest request) {
 		UserDto user = getById(request.getUserId());
-		if (isPswChangeble(request, user)) {
+		String checkString = checkPswChangeble(request, user);
+		if (checkString.equals("A jelszó megváltoztatható.")) {
 			user.setPassword(request.getNewPsw());
 			if (user.getStatus() == UserStatus.PENDING) {
 				user.setStatus(UserStatus.ACTIVATED);
@@ -109,14 +110,23 @@ public class UserService implements UserDetailsService {
 			user.setPassword(request.getNewPsw());
 			save(user);
 		}
+		return checkString;
 	}
 
-	private boolean isPswChangeble(ChangePswRequest request, UserDto user) {
+	private String checkPswChangeble(ChangePswRequest request, UserDto user) {
 		boolean isOldPswOk = pswEncoder.matches(request.getOldPsw(), user.getPassword());
 		boolean isNewPswLongEnough = request.getNewPsw().length() >= 8;
 		boolean areNewPswsTheSame = request.getNewPsw().equals(request.getNewPswAgain());
-		boolean isPswChangeble = isOldPswOk && isNewPswLongEnough && areNewPswsTheSame;
-		return isPswChangeble;
+		if(!isOldPswOk) {
+			return "A Régi jelszó nem egyezik meg a jelenlegivel";
+		}else if (!isNewPswLongEnough) {
+			return "Az új jelszó nem elég hosszú.";
+		} else if (!areNewPswsTheSame) {
+			return "Az új jelszavak nem egyeznek meg.";
+		} else return "A jelszó megváltoztatható.";
+		
+		//Boolean isPswChangeble = isOldPswOk && isNewPswLongEnough && areNewPswsTheSame;
+		//return isPswChangeble.toString();
 	}
 	
 	
@@ -136,10 +146,10 @@ public class UserService implements UserDetailsService {
 
 	public String generateRegisterEmailBody(UserDto user) {
 		String emailBody = new String();
-		emailBody = "Kedves " + user.getName() + "! \r\n \r\nÖnt beregisztrálták a filmklubszov.hu oldalra ";
-		emailBody = emailBody + user.getRole() + " szerepkörben. \r\nA generált jelszava: " + user.getPassword() + ". ";
+		emailBody = "Kedves " + user.getName() + "! <br/><br/>Önt beregisztrálták a <a href=\"http://filmklubszov.hu/profile\"> filmklubszov.hu </a> oldalra ";
+		emailBody = emailBody + getNiceUserRole(user.getRole()) + " szerepkörben. <br/>A generált jelszava: " + user.getPassword() + ". ";
 		emailBody = emailBody + "Ezt az első belépést követően feltétlenül meg kell változtatnia.";
-		emailBody = emailBody + "\r\n \r\nÜdvözlettel: a filmkluszov.hu csapata";
+		emailBody = emailBody + "<br/><br/>Üdvözlettel: a filmkluszov.hu csapata";
 		System.out.println(emailBody);
 		return emailBody;
 	}
@@ -176,7 +186,7 @@ public class UserService implements UserDetailsService {
 			message.setFrom(new InternetAddress("nagy.anasztazia@gmail.com"));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
 			message.setSubject("filmklubszov.hu regisztráció");
-			message.setText(emailBody);
+			message.setText(emailBody, "UTF-8", "html");
 			
 			//Message messageWithEmail = gmailUtils.createMessageWithEmail(message);
 
@@ -188,6 +198,25 @@ public class UserService implements UserDetailsService {
 			throw new RuntimeException(e);
 		}
 		
+	}
+	
+	private String getNiceUserRole(String role) {
+		String niceRole = "";
+		switch (role) {
+		case "ROLE_ADMIN":
+			niceRole = "adminisztrátor";
+			break;
+		case "ROLE_VENDOR":
+			niceRole = "partner";
+			break;
+		case "ROLE_ORGANIZER":
+			niceRole = "szervező";
+			break;
+
+		default:
+			break;
+		}
+		return niceRole;
 	}
 
 

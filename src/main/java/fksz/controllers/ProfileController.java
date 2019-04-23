@@ -5,10 +5,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import fksz.authentication.service.AuthenticationService;
 import fksz.authentication.view.model.LoginRequest;
@@ -23,11 +25,8 @@ import fksz.transformers.UserTransformer;
 @RequestMapping("/profile")
 public class ProfileController extends MasterController{
 
-	@Autowired
-	UserService userService;
-	@Autowired
-	UserTransformer userTransformer;
-	
+	@Autowired UserService userService;
+	@Autowired UserTransformer userTransformer;
 	
 	public ProfileController(LocalizationService localizationService, AuthenticationService authenticationService, LocalizationUrlBuilder localizationUrlBuilder) {
 		super(localizationService, authenticationService, localizationUrlBuilder);
@@ -46,9 +45,11 @@ public class ProfileController extends MasterController{
 	}
 	
 	@RequestMapping(value="/changepsw", method=RequestMethod.POST)
-	public String changePsw(ChangePswRequest changePswRequest, BindingResult bindingResult) {
-		userService.changeUserPassword(changePswRequest);
-		return "redirect:/profile";
+	public ModelAndView changePsw(ChangePswRequest changePswRequest, BindingResult bindingResult, ModelMap model) {
+		String checkString = userService.changeUserPassword(changePswRequest);
+		ModelAndView mav = new ModelAndView("profile");
+		mav.addObject("successMsg", checkString);
+		return mav;
 	}
 
 	@RequestMapping(method=RequestMethod.GET)

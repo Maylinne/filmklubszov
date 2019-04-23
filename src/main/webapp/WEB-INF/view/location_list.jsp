@@ -6,7 +6,16 @@
 
 
 <t:master>
-
+		<div id="heading-breadcrumbs" class="custom-heading">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7">
+                        <h1>Vetítőhelyek</h1>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
 	<div class="container">
 
 		<div class="row">
@@ -23,10 +32,11 @@
 									<th colspan="2">Név</th>
 									<th>Város</th>
 									<th colspan="2">Cim</th>
-									<th style="width: 120px"><a href="#" data-toggle="modal"
-										data-target="#addLocation_modal"><i
-											class="fa fa-plus-square fa-2x"></i><span
-											class="addButtonText">Helyszin</span></a></th>
+									<th style="width: 120px">
+										<a href="#" class="btn btn-template-main" data-toggle="modal" data-target="#addLocation_modal">
+											<span class="addButtonText">Új helyszin</span>
+										</a>
+									</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -61,9 +71,8 @@
 														<th colspan="2">Név</th>
 														<th>Férőhelyek</th>
 														<th class="spotModal" style="width: 110px">
-															<a href="#" data-toggle="modal" data-target="#addSpot_modal">
-																<i class="fa fa-plus-square fa-2x"></i>
-																<span class="addButtonText">Terem</span>
+															<a href="#" class="btn btn-template-main" data-toggle="modal" data-target="#addSpot_modal">
+																<span class="addButtonText">Új terem</span>
 															</a>
 														</th>
 													</tr>

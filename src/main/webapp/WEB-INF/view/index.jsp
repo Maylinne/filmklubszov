@@ -7,18 +7,34 @@
 
 
 <t:master>
-	<!-- To check the role. Dev purposes -->
-	<security:authorize access="hasRole('ROLE_VENDOR')">
-		This text is only visible to a vendor <br/>
-	</security:authorize>
-	<security:authorize access="hasRole('ROLE_ADMIN')">
-		This text is only visible to an admin <br/>
-	</security:authorize>
 
+		<section>
+			<div class="custom-heading home-carousel owl-carousel">
+			<div class="dark-mask"></div>
+	            <div class="container">
+	                <div class="row">
+	                    <div class="col-sm-5">
+	                    	<ul class="list-style-none">
+	                        	<li>Filmklub statisztika 2018 </li>                                    
+	                        </ul>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	 
+        </section>
+        <div class="container">
+        <div class="row">
+           <div class="col-md-12">
+				<p class="text-muted lead">Mozgalmi körkép</p>
+			</div>
+			</div>
+			</div>
+        
         <section class="bar background-pentagon">
                 <div class="container">
-                
-                    <div class="row showcase">
+                       
+	     		 <div class="row showcase">
                         <div class="col-md-3 col-sm-6">
                             <div class="item">
                                 <div class="icon"><i class="fa fa-align-justify"></i>

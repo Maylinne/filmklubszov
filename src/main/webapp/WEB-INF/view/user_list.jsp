@@ -6,7 +6,16 @@
 
 
 <t:master>
-
+		<div id="heading-breadcrumbs" class="custom-heading">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7">
+                        <h1>Felhasználók</h1>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
 	<div class="container">
 
 		<div class="row">
@@ -24,7 +33,11 @@
 									<th colspan="2">E-mail</th>
 									<th>Szerepkör</th>
 									<th>Státusz</th>
-									<th style="width: 140px"><a href="#" data-toggle="modal" data-target="#addUser_modal"><i class="fa fa-plus-square fa-2x"></i><span class="addButtonText">Felhasználó</span></a></th>
+									<th style="width: 140px">
+										<a href="#" class="btn btn-template-main" data-toggle="modal" data-target="#addUser_modal">
+											<span class="addButtonText">Új felhasználó</span>
+										</a>
+									</th>
 								</tr>
 							</thead>
 							
@@ -74,8 +87,8 @@
 							<div class="form-group">
                                 <form:input path="email" type="text" class="form-control" id="Email" placeholder="Email címe" />
                             </div>
-                            <div>
-                            	<form:select id="roleSelect" path="role" items="${userModel.availableRoles}"></form:select>
+                            <div  class="form-group">
+                            	<form:select id="roleSelect"  class="form-control" path="role" items="${userModel.availableRoles}"></form:select>
                             </div>
                             
                             <p class="text-center">

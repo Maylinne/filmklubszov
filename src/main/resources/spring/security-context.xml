@@ -11,7 +11,10 @@
     <intercept-url pattern="/users/**" access="hasRole('ROLE_ADMIN')" />
     <intercept-url pattern="/locations/**" access="hasAnyRole('ROLE_ADMIN,ROLE_VENDOR')" />
     <intercept-url pattern="/movies/**" access="hasAnyRole('ROLE_ADMIN,ROLE_VENDOR')" />
-    <intercept-url pattern="/offers/**" access="hasAnyRole('ROLE_ADMIN,ROLE_VENDOR,ROLE_ORGANIZER')" />
+    <intercept-url pattern="/offers/mycutoffers/**" access="hasAnyRole('ROLE_ADMIN,ROLE_VENDOR')" />
+    <intercept-url pattern="/offers/myspotoffers/**" access="hasAnyRole('ROLE_ADMIN,ROLE_VENDOR')" />
+    <intercept-url pattern="/offers/allcutoffers/**" access="hasAnyRole('ROLE_ADMIN,ROLE_VENDOR,ROLE_ORGANIZER')" />
+    <intercept-url pattern="/offers/allspotoffers/**" access="hasAnyRole('ROLE_ADMIN,ROLE_VENDOR,ROLE_ORGANIZER')" />
     <form-login login-page="/login.html" default-target-url="/" authentication-failure-url="/login.html" password-parameter="password"
       username-parameter="email" />
     <logout logout-success-url="/" />

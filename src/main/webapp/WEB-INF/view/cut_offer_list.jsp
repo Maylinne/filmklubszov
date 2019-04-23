@@ -6,7 +6,16 @@
 
 
 <t:master>
-
+		<div id="heading-breadcrumbs" class="custom-heading">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7">
+                        <h1>Rendelhető kópiák</h1>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
 	<div class="container">
 
 		<div class="row">
@@ -36,38 +45,37 @@
 
 								<tbody>
 									<c:if test="${not isMine}">
-									
 										<c:forEach var="cutOfferModel" items="${cutOfferModels.offers}">
 											<tr data-offerId="${cutOfferModel.id}">
 												<td colspan="2"><h5>
 														<c:out value="${cutOfferModel.partner.name}"></c:out>
-														valamike
 													</h5></td>
 												<td colspan="2">
 													<c:out value="${cutOfferModel.cut.filmMetaHungarianTitle} (${cutOfferModel.cut.hungarianTitle})"></c:out>
+													<c:out value="${cutOfferModel.cut.filmMetaTitle} (${cutOfferModel.cut.title})"></c:out>
 												</td>
 												<td><c:out value="${cutOfferModel.description}"></c:out></td>
-												<td><span class="listAction deleteOffer"><i class="fa fa-trash-o"></i></span></td>
+												<security:authorize access="hasRole('ROLE_ADMIN')">
+													<td><span class="listAction deleteOffer"><i class="fa fa-trash-o"></i></span></td>
+												</security:authorize>
 											</tr>
 										</c:forEach>
 									</c:if>
 									
 									<c:if test="${isMine}">
-									valami más
-										<c:forEach var="cutOfferModel" items="${cutOfferModels.offers}">
-										<c:if test="${myCutOfferModels.principalId eq cutOfferModel.partner.id}">
+										<c:forEach var="cutOfferModel" items="${myCutOfferModels.offers}">
 											<tr data-offerId="${cutOfferModel.id}">
 												<td colspan="2"><h5>
-												
 														<c:out value="${cutOfferModel.partner.name}"></c:out>
 													</h5></td>
 												<td colspan="2">
+													<c:out value="${cutOfferModel.cut.filmMetaTitle} (${cutOfferModel.cut.title})"></c:out><br/>
 													<c:out value="${cutOfferModel.cut.filmMetaHungarianTitle} (${cutOfferModel.cut.hungarianTitle})"></c:out>
+													
 												</td>
 												<td><c:out value="${cutOfferModel.description}"></c:out></td>
 												<td><span class="listAction deleteOffer"><i class="fa fa-trash-o"></i></span></td>
 											</tr>
-										</c:if>
 										</c:forEach>
 									</c:if>
 								</tbody>

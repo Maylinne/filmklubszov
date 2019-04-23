@@ -3,6 +3,7 @@ package fksz.controllers;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
@@ -74,13 +75,21 @@ public class OfferController extends MasterController {
 		return new OfferRequest();
 	}
 
-	
-	
 	@ModelAttribute("cutOfferModels")
 	public OfferModels getAllCutOffers() {
 		OfferModels offerModels = new OfferModels();
 		List<OfferModel> offers = offerTransformer.dtosToModels(offerService.getAll());
 		offers = offers.stream().filter(offer -> offer.getSpot() == null).collect(Collectors.toList());
+		offerModels.setOffers(offers);
+		offerModels.setPrincipalId(authenticationService.getPrincipalId());
+		return offerModels;
+	}
+	
+	@ModelAttribute("myCutOfferModels")
+	public OfferModels getMyCutOffers() {
+		OfferModels offerModels = new OfferModels();
+		List<OfferModel> offers = offerTransformer.dtosToModels(offerService.getAll());
+		offers = offers.stream().filter(offer -> offer.getSpot() == null && offer.getPartner().getId() == authenticationService.getPrincipalId()).collect(Collectors.toList());
 		offerModels.setOffers(offers);
 		offerModels.setPrincipalId(authenticationService.getPrincipalId());
 		return offerModels;
@@ -106,21 +115,23 @@ public class OfferController extends MasterController {
 		return offers.stream().filter(offer -> offer.getCut() == null).collect(Collectors.toList());
 	}
 	
-	@RequestMapping(value="/allspotoffers", method=RequestMethod.GET)
-	public String allSpotOffers(@ModelAttribute("loginRequest") LoginRequest loginRequest, BindingResult bindingResult, HttpSession httpSession) {
-		authenticationService.isLoginOk(bindingResult, httpSession);
-		return authenticationService.isPrincipalActivated("spot_offer_list");
-	}
-	
 	@ModelAttribute("mySpotOfferModels")
 	public List<OfferModel> getMySpotOffers() {
 		List<OfferModel> offers = offerTransformer.dtosToModels(offerService.getAll());
 		return offers.stream().filter(offer -> offer.getCut() == null && offer.getPartner().getId() == authenticationService.getPrincipalId()).collect(Collectors.toList());
 	}
 	
-	@RequestMapping(value="/myspotoffers", method=RequestMethod.GET)
-	public String mySpotOffers(@ModelAttribute("loginRequest") LoginRequest loginRequest, BindingResult bindingResult, HttpSession httpSession) {
+	@RequestMapping(value="/allspotoffers", method=RequestMethod.GET)
+	public String allSpotOffers(@ModelAttribute("loginRequest") LoginRequest loginRequest, BindingResult bindingResult, HttpSession httpSession, ModelMap model) {
 		authenticationService.isLoginOk(bindingResult, httpSession);
+		model.addAttribute("isMine", false);
+		return authenticationService.isPrincipalActivated("spot_offer_list");
+	}
+	
+	@RequestMapping(value="/myspotoffers", method=RequestMethod.GET)
+	public String mySpotOffers(@ModelAttribute("loginRequest") LoginRequest loginRequest, BindingResult bindingResult, HttpSession httpSession, ModelMap model) {
+		authenticationService.isLoginOk(bindingResult, httpSession);
+		model.addAttribute("isMine", true);
 		return authenticationService.isPrincipalActivated("spot_offer_list");
 	}
 	
@@ -132,9 +143,9 @@ public class OfferController extends MasterController {
 	}
 
 	@RequestMapping(value ="/offerPost", method=RequestMethod.POST)
-	public String saveCutOffer (OfferRequest offerRequest, BindingResult bindingResult) {
+	public String saveCutOffer (OfferRequest offerRequest, BindingResult bindingResult, HttpServletRequest request) {
 		offerService.save(offerTransformer.requestToDto(offerRequest));
-		return "redirect:/offers";
+		return "redirect:" + request.getHeader("referer");
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)

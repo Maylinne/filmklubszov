@@ -6,7 +6,17 @@
 
 
 <t:master>
-
+		
+		<div id="heading-breadcrumbs" class="custom-heading">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7">
+                        <h1>Vetíthető filmek</h1>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
 	<div class="container">
 
 		<div class="row">
@@ -20,12 +30,12 @@
 						<table class="table movieTable">
 							<thead>
 								<tr>
-									<th colspan="2">Film</th>
+									<th colspan="2">Címek (a lenyílóban kópiák)</th>
 									<th colspan="2">Rendező</th>
-									<th style="width: 100px"><a href="#" data-toggle="modal"
-										data-target="#addFilm_modal"><i
-											class="fa fa-plus-square fa-2x"></i><span
-											class="addButtonText">Film</span></a></th>
+									<th style="width: 100px">
+										<a href="#" class="btn btn-template-main list-header-btn" data-toggle="modal" data-target="#addFilm_modal">
+											<span class="addButtonText">Új film</span>
+										</a></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -54,13 +64,14 @@
 											<table class="table">
 												<thead>
 													<tr>
-														<th>Kópia</th>
+														<th>Kópiák</th>
 														<th>Év</th>
 														<th>Hossz</th>
-														<th class="cutModal" style="width: 100px"><a href="#"
-															data-toggle="modal" data-target="#addCut_modal"><i
-																class="fa fa-plus-square fa-2x"></i><span
-																class="addButtonText">Kópia</span></a></th>
+														<th class="cutModal" style="width: 100px">
+															<a href="#" class="btn btn-template-main list-header-btn" data-toggle="modal" data-target="#addCut_modal">
+																<span class="addButtonText">Új kópia</span>
+															</a>
+														</th>
 													</tr>
 												</thead>
 												
@@ -68,7 +79,7 @@
 													<c:if test="${not empty filmMetaModel.cuts}">
 														<c:forEach var="cutModel" items="${filmMetaModel.cuts}">
 															<tr data-cutId="${cutModel.cutId}">
-																<td><c:out value="${cutModel.title}"></c:out></td>
+																<td><c:out value="${cutModel.title} (${cutModel.hungarianTitle})"></c:out></td>
 																<td><c:out value="${cutModel.year}"></c:out></td>
 																<td><c:out value="${cutModel.length}"></c:out></td>
 																<td>
@@ -140,8 +151,7 @@
 
 				<div class="modal-content">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-hidden="true">&times;</button>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						<h4 class="modal-title" id="AddFilm">Kópia hozzáadása</h4>
 					</div>
 					<div class="modal-body">
@@ -155,10 +165,10 @@
 								<form:input path="hungarianTitle" type="text" class="form-control" id="HungarianTitle"
 									placeholder="Kópia magyar címe" />
 							</div>
-							<div class="form-group">
+							<div class="form-group flex-group">
 								<form:input path="length" type="number" class="form-control" id="Length" placeholder="Hossz" />
 							</div>
-							<div class="form-group">
+							<div class="form-group flex-group">
 								<form:input path="year" type="number" class="form-control" id="Year" placeholder="Kiadás éve" />
 							</div>
 							<p class="text-center">

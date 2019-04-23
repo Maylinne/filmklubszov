@@ -9,12 +9,15 @@
 	<div class="container">
 
 		<div class="col-md-12">
-			<p class="text-muted lead">Üdvözlünk ${user.name}!</p>
+			<p class="text-muted lead">Üdvözlünk, ${user.name}!</p>
 		</div>
 
 		<div class="col-md-12">
 			<p class="text-muted">Jelszó megváltoztatása</p>
 			<p class="text-muted">(Az új jelszónak legalább 8 karakter hosszúnak kell lennie.)</p>
+			<c:if test="${not empty successMsg}">
+				<p class="text-muted" style="color:blue">${successMsg}</p>
+			</c:if>
 		</div>
 
 

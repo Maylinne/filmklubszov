@@ -3,6 +3,10 @@ var _formForViktor = undefined;
 (function(module) {
 	$(document).ready(
 			function() {
+				
+				$("#userList").on("click", function() {
+					window.location.href=$("head base").attr("href")+"users";
+				})
 
 				$(".userTable").on("click", ".deleteUser", function() {
 					var userId = $(this).closest("tr").attr("data-userId");
@@ -406,18 +410,16 @@ var _dialogHelper = undefined;
 	module.resetDialog = function() {
 		$("#confirm-title", module.dialog).html("");
 		$("#confirm-info", module.dialog).html("");
-		$("#confirm-yes", module.dialog).unbind("click");
+		$("#confirm-yes").unbind("click");
 	}
 	
 	module.ShowConfirmation = function(title, description, callback) {
-		
-		
 		$("#confirm-title", module.dialog).html(title);
 		$("#confirm-info", module.dialog).html(description);
 		
 		module.dialog.modal("show");
 		
-		$("#confirm-yes").on("click", module.dialog, function (){
+		$("#confirm-yes").click(function (){
 			if(callback) callback();
 		});
 	}

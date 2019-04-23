@@ -6,7 +6,16 @@
 
 
 <t:master>
-
+		<div id="heading-breadcrumbs" class="custom-heading">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7">
+                        <h1>Bérelhető termek</h1>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
 	<div class="container">
 
 		<div class="row">
@@ -35,17 +44,34 @@
 								</thead>
 
 								<tbody>
-									<c:forEach var="spotOfferModel" items="${spotOfferModels}">
-										<tr data-offerId="${spotOfferModel.id}">
-											<td colspan="2"><h5>
-													<c:out value="${spotOfferModel.partner.name}"></c:out>
-												</h5></td>
-											<td colspan="2"><c:out value="${spotOfferModel.spot.locationName} (${spotOfferModel.spot.name})"></c:out></td>
-											<td><c:out value="${spotOfferModel.description}"></c:out></td>
-											<td><span class="listAction deleteOffer"><i
-													class="fa fa-trash-o"></i></span></td>
-										</tr>
-									</c:forEach>
+									<c:if test="${not isMine}">
+										<c:forEach var="spotOfferModel" items="${spotOfferModels}">
+											<tr data-offerId="${spotOfferModel.id}">
+												<td colspan="2"><h5>
+														<c:out value="${spotOfferModel.partner.name}"></c:out>
+													</h5></td>
+												<td colspan="2"><c:out value="${spotOfferModel.spot.locationName} (${spotOfferModel.spot.name})"></c:out></td>
+												<td><c:out value="${spotOfferModel.description}"></c:out></td>
+												<security:authorize access="hasRole('ROLE_ADMIN')">
+													<td><span class="listAction deleteOffer"><i class="fa fa-trash-o"></i></span></td>
+												</security:authorize>
+											</tr>
+										</c:forEach>
+									</c:if>
+									
+									<c:if test="${isMine}">
+										<c:forEach var="spotOfferModel" items="${mySpotOfferModels}">
+											<tr data-offerId="${spotOfferModel.id}">
+												<td colspan="2"><h5>
+														<c:out value="${spotOfferModel.partner.name}"></c:out>
+													</h5></td>
+												<td colspan="2"><c:out value="${spotOfferModel.spot.locationName} (${spotOfferModel.spot.name})"></c:out></td>
+												<td><c:out value="${spotOfferModel.description}"></c:out></td>
+												<td><span class="listAction deleteOffer"><i
+														class="fa fa-trash-o"></i></span></td>
+											</tr>
+										</c:forEach>
+									</c:if>
 								</tbody>
 							</table>
 						</div>
