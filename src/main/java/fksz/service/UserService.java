@@ -102,7 +102,7 @@ public class UserService implements UserDetailsService {
 	public String changeUserPassword(ChangePswRequest request) {
 		UserDto user = getById(request.getUserId());
 		String checkString = checkPswChangeble(request, user);
-		if (checkString.equals("A jelszó megváltoztatható.")) {
+		if (checkString.equals("A jelszó megváltozott.")) {
 			user.setPassword(request.getNewPsw());
 			if (user.getStatus() == UserStatus.PENDING) {
 				user.setStatus(UserStatus.ACTIVATED);
@@ -123,14 +123,9 @@ public class UserService implements UserDetailsService {
 			return "Az új jelszó nem elég hosszú.";
 		} else if (!areNewPswsTheSame) {
 			return "Az új jelszavak nem egyeznek meg.";
-		} else return "A jelszó megváltoztatható.";
-		
-		//Boolean isPswChangeble = isOldPswOk && isNewPswLongEnough && areNewPswsTheSame;
-		//return isPswChangeble.toString();
+		} else return "A jelszó megváltozott.";
 	}
 	
-	
-
 	public void generateAndSendRegistrationEmailWithNewPassword(int userId) {
 		UserDto user = getById(userId);
 		user.setStatus(UserStatus.PENDING);
@@ -146,10 +141,10 @@ public class UserService implements UserDetailsService {
 
 	public String generateRegisterEmailBody(UserDto user) {
 		String emailBody = new String();
-		emailBody = "Kedves " + user.getName() + "! <br/><br/>Önt beregisztrálták a <a href=\"http://filmklubszov.hu/profile\"> filmklubszov.hu </a> oldalra ";
+		emailBody = "Kedves " + user.getName() + "! <br/><br/>Önt beregisztrálták a <a href=\"http://filmklubszov.hu/profile\">filmklubszov.hu</a> oldalra ";
 		emailBody = emailBody + getNiceUserRole(user.getRole()) + " szerepkörben. <br/>A generált jelszava: " + user.getPassword() + ". ";
 		emailBody = emailBody + "Ezt az első belépést követően feltétlenül meg kell változtatnia.";
-		emailBody = emailBody + "<br/><br/>Üdvözlettel: a filmkluszov.hu csapata";
+		emailBody = emailBody + "<br/><br/>Üdvözlettel: a Filmklubszövetség Titkársága";
 		System.out.println(emailBody);
 		return emailBody;
 	}

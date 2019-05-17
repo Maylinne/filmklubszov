@@ -6,118 +6,73 @@
 
 
 <t:master>
-		<div id="heading-breadcrumbs" class="custom-heading">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-7">
-                        <h1>Vetítőhelyek</h1>
-                    </div>
-                    
+	<!-- GRAY HEADER -->
+	<div id="heading-breadcrumbs" class="custom-heading">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <h1>Vetítőhelyek</h1>
                 </div>
             </div>
         </div>
+    </div>
+    <!-- GRAY HEADER -->
+        
+    <!-- LOCATION LIST -->
+	<div class="container table-container locationTable">
+			<div class="row outer-header-row">
+			<div class="col-md-offset-1 col-md-4">Név</div>
+			<div class="col-md-4">(Város) Cím</div>
+			<div class="button-div col-md-2">
+				<a href="#" class="btn btn-template-main list-header-btn" data-toggle="modal" data-target="#addLocation_modal">
+					<span class="addButtonText">Új helyszín</span>
+				</a>
+			</div>
+		</div>
+		
+		<c:forEach var="locationModel" items="${locationModels}" varStatus="loopStatus">
+			<div class="row outer-table-row ${loopStatus.index % 2 == 0 ? 'even' : ''}">
+				<div class="col-md-offset-1 col-md-1"><span class="expandButton"> <i class="fa fa-angle-down fa-2x"> </i></span></div>
+				<div class="col-md-3"><c:out value="${locationModel.name} "></c:out></div>
+				<div class="col-md-5"><c:out value="(${locationModel.city}) ${locationModel.address}"></c:out></div>
+				<div class="col-md-1">
+					<security:authorize access="hasRole('ROLE_ADMIN')">
+						<span class="listAction deleteLocation" data-locationId="${locationModel.id}"><i class="fa fa-trash-o"></i></span> 
+						<span class="listAction editLocation" data-locationId="${locationModel.id}"><i class="fa fa-edit"></i></span>
+					</security:authorize>
+				</div>
+			</div>
+			<div class="inner-rows">
+				<div class="row inner-header-row" data-locationId="${locationModel.id}">
+					<div class="col-md-offset-2 col-md-3">Termek</div>
+					<div class="col-md-2">Férőhelyek</div>
+					<div class="button-div col-md-4">
+						<a href="#" class="btn btn-template-main list-header-btn addSpot" data-locationId="${locationModel.id}" data-toggle="modal" data-target="#addSpot_modal">
+							<span class="addButtonText">Új terem</span>
+						</a>
+					</div>
+				</div>
+				<c:forEach var="spotModel" items="${locationModel.spots}" varStatus="spotLoopStatus">
+					<div class="row inner-table-row ${spotLoopStatus.index % 2 == 0 ? 'even' : ''}">
+						<div class="col-md-offset-2 col-md-3"><c:out value="${spotModel.name}"></c:out></div>
+						<div class="col-md-5"><c:out value="${spotModel.places}"></c:out></div>
+						<div class="col-md-1">
+							<security:authorize access="hasRole('ROLE_ADMIN')">
+								<span class="listAction deleteSpot" data-spotId="${spotModel.id}"><i class="fa fa-trash-o"></i></span> 
+								<span class="listAction editSpot" data-spotId="${spotModel.id}"><i class="fa fa-edit"></i></span>
+							</security:authorize>
+						</div>
+					</div>		
+				</c:forEach>
+			</div>
+		</c:forEach>				
+	</div>
+	<!-- LOCATION LIST END -->
+    
+    <!-- MODALS -->
 	<div class="container">
 
-		<div class="row">
-			<div class="col-md-12">
-				<p class="text-muted lead">Helyek listája</p>
-			</div>
-			<div class="col-md-12 clearfix" id="films">
-				<div class="box">
-
-					<div class="table-responsive">
-						<table class="table locationTable">
-							<thead>
-								<tr>
-									<th colspan="2">Név</th>
-									<th>Város</th>
-									<th colspan="2">Cim</th>
-									<th style="width: 120px">
-										<a href="#" class="btn btn-template-main" data-toggle="modal" data-target="#addLocation_modal">
-											<span class="addButtonText">Új helyszin</span>
-										</a>
-									</th>
-								</tr>
-							</thead>
-							<tbody>
-
-								<c:forEach var="locationModel" items="${locationModels}">
-									<tr data-locationId="${locationModel.id}">
-										<td>
-											<span class="expandButton"> 
-												<i class="fa fa-angle-down fa-2x"></i>
-											</span>
-										</td>
-										<td><h5>
-												<c:out value="${locationModel.name}"></c:out>
-											</h5></td>
-										<td><c:out value="${locationModel.city}"></c:out></td>
-										<td colspan="2"><c:out value="${locationModel.address}"></c:out></td>
-										<td>
-										<security:authorize access="hasRole('ROLE_ADMIN')">
-											<span class="listAction deleteLocation"><i class="fa fa-trash-o"></i></span>
-											<span class="listAction editLocation"><i class="fa fa-edit"></i></span>
-										</security:authorize>
-										</td>
-									</tr>
-
-
-									<tr class="subTableRow" data-locationId="${locationModel.id}">
-										<td></td>
-										<td colspan="5">
-											<table class="table">
-												<thead>
-													<tr>
-														<th colspan="2">Név</th>
-														<th>Férőhelyek</th>
-														<th class="spotModal" style="width: 110px">
-															<a href="#" class="btn btn-template-main" data-toggle="modal" data-target="#addSpot_modal">
-																<span class="addButtonText">Új terem</span>
-															</a>
-														</th>
-													</tr>
-												</thead>
-												<tbody>
-													<c:if test="${not empty locationModel.spots}">
-														<c:forEach var="spotModel" items="${locationModel.spots}">
-															<tr data-spotId="${spotModel.id}">
-																<td colspan="2"><c:out value="${spotModel.name}"></c:out></td>
-																<td><c:out value="${spotModel.places}"></c:out></td>
-																<td>
-																	<security:authorize access="hasRole('ROLE_ADMIN')">
-																		<span class="listAction deleteSpot"><i class="fa fa-trash-o"></i></span> 
-																		<span class="listAction editSpot"><i class="fa fa-edit"></i></span>
-																	</security:authorize>
-																</td>
-															</tr>
-
-														</c:forEach>
-													</c:if>
-												</tbody>
-											</table>
-										</td>
-									</tr>
-
-
-								</c:forEach>
-
-
-							</tbody>
-						</table>
-
-					</div>
-					<!-- /.table-responsive -->
-
-
-				</div>
-				<!-- /.box -->
-
-			</div>
-
-		</div>
-
-		<div class="modal fade" id="addLocation_modal" tabindex="-1"
-			role="dialog" aria-labelledby="AddLocation" aria-hidden="true">
+		<div class="modal fade" id="addLocation_modal" tabindex="-1" role="dialog" aria-labelledby="AddLocation" aria-hidden="true">
 			<div class="modal-dialog modal-sm">
 
 				<div class="modal-content">
@@ -170,8 +125,8 @@
 								<form:input path="name" type="text" class="form-control" id="Name" placeholder="Terem neve" />
 							</div>
 							<div class="form-group flex-group">
-								<span class="flex-label form-control">Férőhelyek</span>
-								<form:input path="places" type="number" class="form-control" id="Places" placeholder="Helyek" />
+								<span class="flex-label form-control no-border">Férőhelyek:</span>
+								<form:input path="places" type="number" class="form-control flex-input" id="Places" placeholder="Helyek" />
 							</div>
 
 							<p class="text-center">
@@ -187,5 +142,6 @@
 		</div>
 
 	</div>
+	<!-- MODALS END -->
 
 </t:master>

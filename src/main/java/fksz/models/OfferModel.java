@@ -10,15 +10,18 @@ public class OfferModel {
 	private CutModel cut;
 	private SpotModel spot;
 	private String description;
+	private String lastModifiedTime;
 	private Map<Integer, String> availableCuts = new HashMap<Integer, String>();
 	private Map<Integer, String> availableSpots = new HashMap<Integer, String>();
 	private Map<Integer, String> availableUsers = new HashMap<Integer, String>();
-	
-	public OfferModel() {}
-	
+
+	public OfferModel() {
+	}
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -50,8 +53,17 @@ public class OfferModel {
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getLastModifiedTime() {
+		return lastModifiedTime;
+	}
+
+	public void setLastModifiedTime(String lastModifiedTime) {
+		this.lastModifiedTime = lastModifiedTime;
 	}
 
 	public Map<Integer, String> getAvailableCuts() {
@@ -77,8 +89,5 @@ public class OfferModel {
 	public void setAvailableSpots(Map<Integer, String> availableSpots) {
 		this.availableSpots = availableSpots;
 	}
-
-
-
 
 }

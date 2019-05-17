@@ -198,9 +198,157 @@ hr.extra-hr {
 }
 
 .list-header-btn {
-	    width: 100px;
+/*	width: 100px;
     border-radius: 8px;
     background-color: #80cbd9;
     color: #fff;
-    border: none;
+    border: none;*/
+}
+
+.table-container .row {
+	line-height: 2.5em;
+	padding: 8px;
+	/* border-bottom: 1px solid #ddd; */
+}
+
+.table-container > .row.outer-table-row,
+.table-container .row.inner-table-row {
+	padding: 0px 8px;
+}
+
+.table-container .row.inner-header-row > div {
+	padding-top: 14px;
+}
+
+.lm-date {
+	font-size: 13px;
+}
+
+.inner-rows {
+	padding-bottom: 12px;
+}
+
+.table-container .row.inner-header-row > div.button-div {
+	padding-top: 0;
+}
+
+.no-border {
+	border-color: transparent;
+	width: 60%;
+}
+
+.table-container .row.inner-header-row {
+	line-height: 1.42857143;
+}
+
+.outer-header-row, .inner-header-row {
+	font-weight: 500;
+}
+
+hr {
+	margin: 0;
+	border-top: 1px solid lightgrey;
+}
+
+.bordered {
+	border-bottom: 1px solid lightgrey;
+}
+
+div.row.hrrow {
+	padding: 0;
+}
+
+.cut-title > span {
+	display: block;
+	line-height: 1.25em;
+}
+
+.cut-title {
+	padding-bottom:1px;
+}
+
+.table-container > .outer-header-row {
+	padding: 0 8px;
+}
+
+.table-container > .outer-header-row > div,
+.table-container .inner-header-row > div {
+	padding:8px 15px;
+	border-bottom: solid 1px lightgrey;
+}
+
+
+.table-container > .row.outer-header-row > div.button-div,
+.table-container .row.inner-header-row > div.button-div {
+	text-align: end;
+}
+
+.table-container > .outer-header-row + .outer-table-row {
+	padding-top: 8px;
+}
+
+.table-container .inner-header-row + .inner-table-row {
+	padding-top: 6px;
+}
+
+.table-container .row.inner-table-row:hover > div {
+	background-color: #80cbd9;
+	color: white;
+}
+
+.table-container > .row.outer-table-row:hover > div {
+	background-color: #38a7bb;
+	color: white;
+}
+
+.table-container > .row.outer-table-row {
+	line-height: 2.8em;
+}
+
+.table-container > .row.outer-table-row:hover .listAction,
+.table-container .row.inner-table-row:hover .listAction {
+	color:white;
+}
+
+.row.outer-table-row.even > div ,
+.row.inner-table-row.even > div {
+	background-color: #FBFBFB;
+}
+
+.row.outer-table-row > div ,
+.row.inner-table-row > div {
+	background-color: #F3F3F3;
+}
+
+.inner-table-row > div {
+	min-height: 35px;
+}
+
+.outer-table-row > div {
+	min-height: 40px;
+}
+
+.outer-header-row > div{
+	min-height: 53px;
+}
+
+.offer-cut-title span {
+	line-height: 1.42857143;
+	display: block;
+}
+
+.flex-group {
+	display: flex;
+	flex-orientation: flex-start;
+	flex-direction: row;
+}
+
+.flex-label, .flex-input {
+	display: inline-block;
+}
+
+.description {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	 white-space: nowrap;
 }

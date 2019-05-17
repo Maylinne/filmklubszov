@@ -1,6 +1,7 @@
 package fksz.transformers;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +39,7 @@ public class OfferTransformer {
 		dto.setCut(cutTransformer.entityToDto(entity.getCut()));
 		dto.setPartner(userTransformer.entitytoDto(entity.getPartner()));
 		dto.setSpot(spotTransformer.entityToDto(entity.getSpot()));
+		dto.setLastModifiedTime(entity.getLastModifiedTime().format(DateTimeFormatter.ofPattern("yyyy.MM.dd.")));
 		return dto;
 	}
 
@@ -69,6 +71,7 @@ public class OfferTransformer {
 		model.setAvailableCuts(cutService.getTheAvailableCuts());
 		model.setPartner(userTransformer.dtoToModel(dto.getPartner()));
 		model.setSpot(spotTransformer.dtoToModel(dto.getSpot()));
+		model.setLastModifiedTime(dto.getLastModifiedTime());
 		return model;
 	}
 

@@ -46,14 +46,14 @@
                             <div class="item">
                                 <div class="icon"><i class="fa fa-align-justify"></i>
                                 </div>
-                                <h4><span class="counter">100</span><br>sorozat</h4>
+                                <h4><span class="counter">80</span><br>tematika</h4>
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-6">
                             <div class="item">
                                 <div class="icon"><i class="fa fa-copy"></i>
                                 </div>
-                                <h4><span class="counter">950</span><br>alkalom</h4>
+                                <h4><span class="counter">950</span><br>esemény</h4>
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-6">

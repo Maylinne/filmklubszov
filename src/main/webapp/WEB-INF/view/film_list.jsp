@@ -6,109 +6,22 @@
 
 
 <t:master>
-		
-		<div id="heading-breadcrumbs" class="custom-heading">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-7">
-                        <h1>Vetíthető filmek</h1>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
+	
+	<!-- GRAY HEADER -->
+	<div id="heading-breadcrumbs" class="custom-heading">
+         <div class="container">
+             <div class="row">
+                 <div class="col-md-7">
+                     <h1>Vetíthető filmek</h1>
+                 </div>
+                 
+             </div>
+         </div>
+     </div>
+     <!-- GRAY HEADER END -->
+     
+     <!-- MODALS -->
 	<div class="container">
-
-		<div class="row">
-			<div class="col-md-12">
-				<p class="text-muted lead">Filmek listája</p>
-			</div>
-			<div class="col-md-12 clearfix" id="films">
-				<div class="box">
-
-					<div class="table-responsive">
-						<table class="table movieTable">
-							<thead>
-								<tr>
-									<th colspan="2">Címek (a lenyílóban kópiák)</th>
-									<th colspan="2">Rendező</th>
-									<th style="width: 100px">
-										<a href="#" class="btn btn-template-main list-header-btn" data-toggle="modal" data-target="#addFilm_modal">
-											<span class="addButtonText">Új film</span>
-										</a></th>
-								</tr>
-							</thead>
-							<tbody>
-
-								<c:forEach var="filmMetaModel" items="${filmMetaModels}">
-									<tr data-filmMetaId="${filmMetaModel.id}">
-										<td><span class="expandButton"> <i
-												class="fa fa-angle-down fa-2x"> </i></span></td>
-										<td><h5>
-												<c:out
-													value="${filmMetaModel.title} (${filmMetaModel.hungarianTitle})"></c:out>
-											</h5></td>
-										<td colspan="2"><c:out value="${filmMetaModel.director}"></c:out></td>
-										<td>
-										<security:authorize access="hasRole('ROLE_ADMIN')">
-											<span class="listAction deleteFilm"><i class="fa fa-trash-o"></i></span> 
-											<span class="listAction editFilm"><i class="fa fa-edit"></i></span>
-										</security:authorize>
-										</td>
-									</tr>
-
-
-									<tr class="subTableRow" data-filmMetaId="${filmMetaModel.id}">
-										<td></td>
-										<td colspan="4" style="padding-right: 0px">
-											<table class="table">
-												<thead>
-													<tr>
-														<th>Kópiák</th>
-														<th>Év</th>
-														<th>Hossz</th>
-														<th class="cutModal" style="width: 100px">
-															<a href="#" class="btn btn-template-main list-header-btn" data-toggle="modal" data-target="#addCut_modal">
-																<span class="addButtonText">Új kópia</span>
-															</a>
-														</th>
-													</tr>
-												</thead>
-												
-												<tbody>
-													<c:if test="${not empty filmMetaModel.cuts}">
-														<c:forEach var="cutModel" items="${filmMetaModel.cuts}">
-															<tr data-cutId="${cutModel.cutId}">
-																<td><c:out value="${cutModel.title} (${cutModel.hungarianTitle})"></c:out></td>
-																<td><c:out value="${cutModel.year}"></c:out></td>
-																<td><c:out value="${cutModel.length}"></c:out></td>
-																<td>
-																	<security:authorize access="hasRole('ROLE_ADMIN')">
-																		<span class="listAction deleteCut"><i class="fa fa-trash-o"></i></span> 
-																		<span class="listAction editCut"><i class="fa fa-edit"></i></span>
-																	</security:authorize>
-																</td>
-															</tr>
-														</c:forEach>
-													</c:if>
-												</tbody>
-											</table>
-											
-										</td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-
-					</div>
-					<!-- /.table-responsive -->
-				</div>
-				<!-- /.box -->
-
-			</div>
-
-		</div>
-
 		<div class="modal fade" id="addFilm_modal" tabindex="-1" role="dialog"
 			aria-labelledby="AddFilm" aria-hidden="true">
 			<div class="modal-dialog modal-sm">
@@ -169,7 +82,7 @@
 								<form:input path="length" type="number" class="form-control" id="Length" placeholder="Hossz" />
 							</div>
 							<div class="form-group flex-group">
-								<form:input path="year" type="number" class="form-control" id="Year" placeholder="Kiadás éve" />
+								<form:input path="year" type="number" class="form-control" id="Year" placeholder="Gyártási év" />
 							</div>
 							<p class="text-center">
 								<button type="submit" class="btn btn-template-main">
@@ -183,9 +96,66 @@
 				</div>
 			</div>
 		</div>
-
-
-
 	</div>
+	<!-- MODALS END -->
+	
+	<!-- FILM LIST -->
+	<div class="container table-container movieTable">
+		<div class="row outer-header-row">
+			<div class="col-md-offset-1 col-md-6">Címek</div>
+			<div class="col-md-2">Rendező</div>
+			<div class="button-div col-md-2">
+				<a href="#" class="btn btn-template-main list-header-btn" data-toggle="modal" data-target="#addFilm_modal">
+					<span class="addButtonText">Új cím</span>
+				</a>
+			</div>
+		</div>
+		<c:forEach var="filmMetaModel" items="${filmMetaModels}" varStatus="loopStatus">
+			<div class="row outer-table-row ${loopStatus.index % 2 == 0 ? 'even' : ''}">
+				<div class="col-md-offset-1 col-md-1"><span class="expandButton"> <i class="fa fa-angle-down fa-2x"> </i></span></div>
+				<div class="col-md-5"><c:out value="${filmMetaModel.title} (${filmMetaModel.hungarianTitle})"></c:out></div>
+				<div class="col-md-3"><c:out value="${filmMetaModel.director}"></c:out></div>
+				<div class="col-md-1">
+					<security:authorize access="hasRole('ROLE_ADMIN')">
+						<span class="listAction deleteFilm" data-filmMetaId="${filmMetaModel.id}"><i class="fa fa-trash-o"></i></span> 
+						<span class="listAction editFilm" data-filmMetaId="${filmMetaModel.id}"><i class="fa fa-edit"></i></span>
+					</security:authorize>
+				</div>
+			</div>
+			<div class="inner-rows">
+				<div class="row inner-header-row" data-filmMetaId="${filmMetaModel.id}">
+					<div class="col-md-offset-2 col-md-3">Kópiák</div>
+					<div class="col-md-1">Év</div>
+					<div class="col-md-1">Hossz</div>
+					<div class="button-div col-md-4">
+						<a href="#" class="btn btn-template-main list-header-btn addCut" data-filmMetaId="${filmMetaModel.id}" data-toggle="modal" data-target="#addCut_modal">
+							<span class="addButtonText">Új kópia</span>
+						</a>
+					</div>
+				</div>
+				<c:forEach var="cutModel" items="${filmMetaModel.cuts}" varStatus="cutLoopStatus">
+					<div class="row inner-table-row ${cutLoopStatus.index % 2 == 0 ? 'even' : ''}">
+						<div class="col-md-offset-2 col-md-3 cut-title">
+							<span><c:out value="${cutModel.title}"></c:out></span>
+							<c:if test="${not empty cutModel.hungarianTitle}">
+								<span><c:out value="${cutModel.hungarianTitle}"></c:out></span>
+							</c:if>
+						</div>
+						<div class="col-md-1"><c:out value="${cutModel.year}"></c:out></div>
+						<div class="col-md-4"><c:out value="${cutModel.length}"></c:out></div>
+						<div class="col-md-1">
+							<security:authorize access="hasRole('ROLE_ADMIN')">
+								<span class="listAction deleteCut" data-cutId="${cutModel.cutId}"><i class="fa fa-trash-o"></i></span> 
+								<span class="listAction editCut" data-cutId="${cutModel.cutId}"><i class="fa fa-edit"></i></span>
+							</security:authorize>
+						</div>
+					</div>		
+				</c:forEach>
+			</div>
+		</c:forEach>				
+	</div>
+	<!-- FILM LIST END -->
+
+
 
 </t:master>

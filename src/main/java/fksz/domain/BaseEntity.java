@@ -13,7 +13,6 @@ public class BaseEntity {
 	@GeneratedValue
 	protected int id;
 
-
 	private LocalDateTime creationTime;
 	private int createdById;
 	private LocalDateTime lastModifiedTime;

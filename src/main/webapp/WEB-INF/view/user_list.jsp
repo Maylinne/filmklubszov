@@ -6,69 +6,52 @@
 
 
 <t:master>
-		<div id="heading-breadcrumbs" class="custom-heading">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-7">
-                        <h1>Felhasználók</h1>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-	<div class="container">
-
-		<div class="row">
-			<div class="col-md-12">
-				<p class="text-muted lead">Felhasználók listája</p>
+		
+	<div id="heading-breadcrumbs" class="custom-heading">
+	    <div class="container">
+		    <div class="row">
+			    <div class="col-md-7">
+			        <h1>Felhasználók</h1>
+			    </div>
+		    </div>
+	    </div>
+    </div>
+    
+    
+     <!-- USER LIST -->
+	<div class="container table-container userTable">
+			<div class="row outer-header-row">
+			<div class="col-md-offset-1 col-md-2">Felhasználónév</div>
+			<div class="col-md-3">E-mail</div>
+			<div class="col-md-2">Szerepkör</div>
+			<div class="col-md-1">Státusz</div>
+			<div class="button-div col-md-2">
+				<a href="#" class="btn btn-template-main list-header-btn" data-toggle="modal" data-target="#addUser_modal">
+					<span class="addButtonText">Új felhasználó</span>
+				</a>
 			</div>
-			<div class="col-md-12 clearfix" id="users">
-				<div class="box">
-
-					<div class="table-responsive">
-						<table class="table userTable">
-							<thead>
-								<tr>
-									<th colspan="2">Felhasználónév</th>
-									<th colspan="2">E-mail</th>
-									<th>Szerepkör</th>
-									<th>Státusz</th>
-									<th style="width: 140px">
-										<a href="#" class="btn btn-template-main" data-toggle="modal" data-target="#addUser_modal">
-											<span class="addButtonText">Új felhasználó</span>
-										</a>
-									</th>
-								</tr>
-							</thead>
-							
-							<tbody>
-								<c:forEach var="userModel" items="${userModels}">
-									<tr class="userRow" data-userId="${userModel.id}">
-										<td colspan="2"><h5>
-												<c:out value="${userModel.name}"></c:out>
-											</h5>
-										</td>
-										<td colspan="2"><c:out value="${userModel.email}"></c:out></td>
-										<td><c:out value="${userModel.role}"></c:out></td>
-										<td><c:out value="${userModel.status}"></c:out></td>
-										<td>
-											<span class="listAction sendEmail"><i class="fa fa-envelope"></i></span>
-											<span class="listAction deleteUser"><i class="fa fa-trash-o"></i></span>
-											<span class="listAction editUser"><i class="fa fa-edit"></i></span>
-										</td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-					</div>
-					<!-- /.table-responsive -->
-
-				</div>
-				<!-- /.box -->
-
-			</div>
-			
 		</div>
+		
+		<c:forEach var="userModel" items="${userModels}" varStatus="loopStatus">
+			<div class="row outer-table-row ${loopStatus.index % 2 == 0 ? 'even' : ''}">
+				<div class="col-md-offset-1 col-md-2"><c:out value="${userModel.name} "></c:out></div>
+				<div class="col-md-3"><c:out value="${userModel.email} "></c:out></div>
+				<div class="col-md-2"><c:out value="${userModel.role} "></c:out></div>
+				<div class="col-md-1"><c:out value="${userModel.status}"></c:out></div>
+				<div class="col-md-2 text-center">
+					<security:authorize access="hasRole('ROLE_ADMIN')">
+						<span class="listAction sendEmail" data-userId="${userModel.id}"><i class="fa fa-envelope"></i></span>
+						<span class="listAction deleteUser" data-userId="${userModel.id}"><i class="fa fa-trash-o"></i></span> 
+						<span class="listAction editUser" data-userId="${userModel.id}"><i class="fa fa-edit"></i></span>
+					</security:authorize>
+				</div>
+			</div>
+		</c:forEach>				
+	</div>
+	<!-- USER LIST END -->
+    
+    <!-- USER MODAL -->
+	<div class="container">
 		
 		<div class="modal fade" id="addUser_modal" tabindex="-1" role="dialog" aria-labelledby="AddUser" aria-hidden="true">
             <div class="modal-dialog modal-sm">
@@ -101,7 +84,7 @@
             </div>
         </div>
 
-
 	</div>
+	<!-- USER MODAL END -->
 
 </t:master>

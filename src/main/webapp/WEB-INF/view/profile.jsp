@@ -5,18 +5,30 @@
 
 
 <t:master>
-
+	<!-- GRAY HEADER -->
+	<div id="heading-breadcrumbs" class="custom-heading">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <h1>Üdvözlünk, ${user.name}!</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- GRAY HEADER -->
 	<div class="container">
 
-		<div class="col-md-12">
-			<p class="text-muted lead">Üdvözlünk, ${user.name}!</p>
-		</div>
 
 		<div class="col-md-12">
-			<p class="text-muted">Jelszó megváltoztatása</p>
-			<p class="text-muted">(Az új jelszónak legalább 8 karakter hosszúnak kell lennie.)</p>
+			<p class="text-muted">Az új jelszónak legalább 8 karakter hosszúnak kell lennie.</p>
+			<c:if test="${empty successMsg and empty errorMsg}">
+				<p><br></p>
+			</c:if>
+			<c:if test="${not empty errorMsg}">
+				<p class="text-muted" style="color:red"><i class="fa fa-exclamation-triangle"></i> ${errorMsg}</p>
+			</c:if>
 			<c:if test="${not empty successMsg}">
-				<p class="text-muted" style="color:blue">${successMsg}</p>
+				<p class="text-muted" style="color:#38A7BB"><i class="fa fa-check"></i> ${successMsg}</p>
 			</c:if>
 		</div>
 
@@ -24,13 +36,13 @@
 		<form:form class="col-md-4" modelAttribute="changePswRequest" action="profile/changepsw" method="post">
 			<form:input path="userId" id="Id" type="number" style="display:none" value="${user.id}"/>
 			<div class="form-group">
-				<form:input path="oldPsw" type="text" class="form-control" id="OldPsw" placeholder="Régi jelszó" />
+				<form:input path="oldPsw" type="password" class="form-control" id="OldPsw" placeholder="Régi jelszó" />
 			</div>
 			<div class="form-group">
-				<form:input path="newPsw" type="text" class="form-control" id="NewPsw" placeholder="Új jelszó" />
+				<form:input path="newPsw" type="password" class="form-control" id="NewPsw" placeholder="Új jelszó" />
 			</div>
 			<div class="form-group">
-				<form:input path="newPswAgain" type="text" class="form-control" id="NewPswAgain" placeholder="Új jelszó újra" />
+				<form:input path="newPswAgain" type="password" class="form-control" id="NewPswAgain" placeholder="Új jelszó újra" />
 			</div>
 
 			<p class="text-center">

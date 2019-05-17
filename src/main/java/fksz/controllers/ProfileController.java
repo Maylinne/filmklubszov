@@ -3,6 +3,7 @@ package fksz.controllers;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -35,8 +36,12 @@ public class ProfileController extends MasterController{
 	
 	@ModelAttribute("user")
 	public UserModel user() {
-		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
-		return userTransformer.dtoToModel(userService.getByName(userName));
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		UserModel user = new UserModel();
+		if (authentication != null) {
+			user = userTransformer.dtoToModel(userService.getByName(authentication.getName()));
+		}		
+		return user;
 	}
 	
 	@ModelAttribute("changePswRequest")
@@ -48,7 +53,12 @@ public class ProfileController extends MasterController{
 	public ModelAndView changePsw(ChangePswRequest changePswRequest, BindingResult bindingResult, ModelMap model) {
 		String checkString = userService.changeUserPassword(changePswRequest);
 		ModelAndView mav = new ModelAndView("profile");
-		mav.addObject("successMsg", checkString);
+		if(checkString.equals("A jelszó megváltozott.")) {
+			mav.addObject("successMsg", checkString);
+		}else {
+			mav.addObject("errorMsg", checkString);
+		}
+		
 		return mav;
 	}
 

@@ -4,6 +4,10 @@
 
 
 <c:forEach var="driveFile" items="${driveFiles}">
-	<li><a href="/fksz/documents/download?fileId=${driveFile.id}"><c:out
-				value="${driveFile.name}" /></a></li>
+	<li>
+		<a href="/fksz/documents/download?fileId=${driveFile.id}">
+			<i class="fa fa-icon fa-file-text"></i>
+			<c:out value="${driveFile.name}" />
+		</a>
+	</li>
 </c:forEach>

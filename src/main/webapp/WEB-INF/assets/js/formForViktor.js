@@ -9,23 +9,28 @@ var _formForViktor = undefined;
 				})
 
 				$(".userTable").on("click", ".deleteUser", function() {
-					var userId = $(this).closest("tr").attr("data-userId");
+					var userId = $(this).attr("data-userId");
 					var loc = window.location.href;
-					$.ajax({
-						method : "POST",
-						url : "users/deleteuserpost",
-						data : {
-							userId : userId
-						},
-						success : function(result) {
-							if(result != "") alert(result);
-							else window.location.href = loc;
-						}
+					_dialogHelper.ShowConfirmation("Törlés megerősitése", "Biztos, hogy törölni akarod az ajánlatot?", function(){
+						$.ajax({
+							method : "POST",
+							url : "users/deleteuserpost",
+							data : {
+								userId : userId
+							},
+							success : function(result) {
+								if (data == "" || data == null) {
+									window.location.href = loc;
+								} else {
+									alert(data);
+								}
+							}
+						});
 					});
 				})
 				
 				$(".offerTable").on("click", ".deleteOffer", function() {
-					var offerId = $(this).closest("tr").attr("data-offerId");
+					var offerId = $(this).attr("data-offerId");
 					var loc = window.location.href;
 					_dialogHelper.ShowConfirmation("Törlés megerősitése", "Biztos, hogy törölni akarod az ajánlatot?", function(){
 						$.ajax({
@@ -35,8 +40,7 @@ var _formForViktor = undefined;
 								offerId : offerId
 							},
 							success : function(result) {
-								if(result != "") alert(result);
-								else window.location.href = loc;
+								window.location.href = loc;
 							}
 						});
 					});
@@ -44,72 +48,92 @@ var _formForViktor = undefined;
 				})
 				
 				$(".locationTable").on("click", ".deleteLocation", function() {
-					var locationId = $(this).closest("tr").attr("data-locationId");
+					var locationId = $(this).attr("data-locationId");
 					var loc = window.location.href;
-					$.ajax({
-						method : "POST",
-						url : "locations/deletelocationpost",
-						data : {
-							locationId : locationId
-						},
-						success : function(data) {
-							if(data != "") alert(data);
-							else window.location.href = loc;
-						}
+					_dialogHelper.ShowConfirmation("Törlés megerősitése", "Biztos, hogy törölni akarod az ajánlatot?", function(){
+						$.ajax({
+							method : "POST",
+							url : "locations/deletelocationpost",
+							data : {
+								locationId : locationId
+							},
+							success : function(data) {
+								if (data == "" || data == null) {
+									window.location.href = loc;
+								} else {
+									alert(data);
+								}
+							}
+						});
 					});
 				})
 				
 				$(".locationTable").on("click", ".deleteSpot", function() {
-					var spotId = $(this).closest("tr").attr("data-spotId");
+					var spotId = $(this).attr("data-spotId");
 					var loc = window.location.href;
-					$.ajax({
-						method : "POST",
-						url : "locations/deletespotpost",
-						data : {
-							spotId : spotId
-						},
-						success : function(data) {
-							if(data != "") alert(data);
-							else window.location.href = loc;
-						}
+					_dialogHelper.ShowConfirmation("Törlés megerősitése", "Biztos, hogy törölni akarod az ajánlatot?", function(){	
+						$.ajax({
+							method : "POST",
+							url : "locations/deletespotpost",
+							data : {
+								spotId : spotId
+							},
+							success : function(data) {
+								if (data == "" || data == null) {
+									window.location.href = loc;
+								} else {
+									alert(data);
+								}
+							}
+						});
 					});
 				})
 				
 				$(".movieTable").on("click", ".deleteFilm", function() {
-					var filmMetaId = $(this).closest("tr").attr("data-filmMetaId");
+					var filmMetaId = $(this).attr("data-filmMetaId");
 					var loc = window.location.href;
-					$.ajax({
-						method : "POST",
-						url : "movies/deletemoviepost",
-						data : {
-							filmMetaId : filmMetaId
-						},
-						success : function(data) {
-							if(data != "") alert(data);
-							else window.location.href = loc;
-						}
+					_dialogHelper.ShowConfirmation("Törlés megerősitése", "Biztos, hogy törölni akarod az ajánlatot?", function(){
+						$.ajax({
+							method : "POST",
+							url : "movies/deletemoviepost",
+							data : {
+								filmMetaId : filmMetaId
+							},
+							success : function(data) {
+								if (data == "" || data == null) {
+									window.location.href = loc;
+								} else {
+									alert(data);
+								}
+							}
+						});
 					});
 				})
 				
 				$(".movieTable").on("click", ".deleteCut", function() {
-					var cutId = $(this).closest("tr").attr("data-cutId");
+					var cutId = $(this).attr("data-cutId");
 					var loc = window.location.href;
-					$.ajax({
-						method : "POST",
-						url : "movies/deletecutpost",
-						data : {
-							cutId : cutId
-						},
-						success : function(data) {
-							if(data != "") alert(data);
-							else window.location.href = loc;
-						}
+					_dialogHelper.ShowConfirmation("Törlés megerősitése", "Biztos, hogy törölni akarod az ajánlatot?", function(){
+						$.ajax({
+							method : "POST",
+							url : "movies/deletecutpost",
+							data : {
+								cutId : cutId
+							},
+							success : function(data) {
+								if (data == "" || data == null) {
+									window.location.href = loc;
+								} else {
+									alert(data);
+								}
+							}
+						});
 					});
 				})
 				
 
 				$(".userTable").on("click", ".sendEmail", function() {
-					var userId = $(this).closest("tr").attr("data-userId");
+					var userId = $(this).attr("data-userId");
 					$.ajax({
 						method : "POST",
 						url : "users/sendregisteremail",
@@ -123,7 +147,7 @@ var _formForViktor = undefined;
 				})
 				
 				$(".userTable").on("click", ".editUser", function() {
-					var userId = $(this).closest("tr").attr("data-userId");
+					var userId = $(this).attr("data-userId");
 					var loc = window.location.href;
 					$.ajax({
 						method : "POST",
@@ -143,7 +167,7 @@ var _formForViktor = undefined;
 				})
 				
 				$(".locationTable").on("click", ".editLocation", function() {
-					var locationId = $(this).closest("tr").attr("data-locationId");
+					var locationId = $(this).attr("data-locationId");
 					var loc = window.location.href;
 					$.ajax({
 						method : "POST",
@@ -163,7 +187,7 @@ var _formForViktor = undefined;
 				})
 				
 				$(".locationTable").on("click", ".editSpot", function() {
-					var spotId = $(this).closest("tr").attr("data-spotId");
+					var spotId = $(this).attr("data-spotId");
 					var loc = window.location.href;
 					$.ajax({
 						method : "POST",
@@ -183,7 +207,7 @@ var _formForViktor = undefined;
 				})
 				
 				$(".movieTable").on("click", ".editFilm", function() {
-					var filmMetaId = $(this).closest("tr").attr("data-filmMetaId");
+					var filmMetaId = $(this).attr("data-filmMetaId");
 					var loc = window.location.href;
 					$.ajax({
 						method : "POST",
@@ -193,10 +217,11 @@ var _formForViktor = undefined;
 						},
 						success : function(data) {
 							var movie = JSON.parse(data);
-							$("#Id" ,$(".modal-body form")).val(movie.id);
-							$("#Title" ,$(".modal-body form")).val(movie.title);
-							$("#HungarianTitle" ,$(".modal-body form")).val(movie.hungarianTitle);
-							$("#Director" ,$(".modal-body form")).val(movie.director);
+							var movieBodyForm = $(".modal-body form", $("#addFilm_modal")); 
+							$("#Id" ,movieBodyForm).val(movie.id);
+							$("#Title" ,movieBodyForm).val(movie.title);
+							$("#HungarianTitle" ,movieBodyForm).val(movie.hungarianTitle);
+							$("#Director" ,movieBodyForm).val(movie.director);
 							$("#addFilm_modal").modal("show");
 						}
 					});
@@ -204,7 +229,7 @@ var _formForViktor = undefined;
 				
 				
 				$(".movieTable").on("click", ".editCut", function() {
-					var cutId = $(this).closest("tr").attr("data-cutId");
+					var cutId = $(this).attr("data-cutId");
 					var loc = window.location.href;
 					$.ajax({
 						method : "POST",
@@ -214,49 +239,56 @@ var _formForViktor = undefined;
 						},
 						success : function(data) {
 							var cut = JSON.parse(data);
-							$("#Id" ,$(".modal-body form")).val(cut.cutId);
-							$("#FilmMetaId" ,$(".modal-body form")).val(cut.filmMetaId);
-							$("#Title" ,$(".modal-body form")).val(cut.title);
-							$("#HungarianTitle" ,$(".modal-body form")).val(cut.hungarianTitle);
-							$("#Length" ,$(".modal-body form")).val(cut.length);
-							$("#Year" ,$(".modal-body form")).val(cut.year);
+							var cutBodyForm = $(".modal-body form", $("#addCut_modal"));
+							$("#Id" ,cutBodyForm).val(cut.cutId);
+							$("#FilmMetaId" ,cutBodyForm).val(cut.filmMetaId);
+							$("#Title" ,cutBodyForm).val(cut.title);
+							$("#HungarianTitle" ,cutBodyForm).val(cut.hungarianTitle);
+							$("#Length" ,cutBodyForm).val(cut.length);
+							$("#Year" ,cutBodyForm).val(cut.year);
 							$("#addCut_modal").modal("show");
 						}
 					});
 				})
 				
-
-				$(".subTableRow").hide();
+				module.hideInners();
 
 				// Bind list buttons
 				$(".expandButton").click(function() {
-					$(this).closest("tr").next("tr").toggle();
+					module.toggleInners($(this).closest(".outer-table-row"));
 					$("i", $(this)).toggleClass("reverse");
 				});
 
-				$(".cutModal").click(
+				
+				$(".addCut").click(
 						function() {
-							var filmMetaId = $(this).closest(".subTableRow")
-									.attr("data-filmMetaId");
+							var filmMetaId = $(this).attr("data-filmMetaId");
 							$("#FilmMetaId", $("#addCut_modal"))
 									.val(filmMetaId);
 						})
-
-				$(".spotModal").click(
+				
+				$(".addSpot").click(
 						function() {
-							var locationId = $(this).closest(".subTableRow")
-									.attr("data-locationId");
+							var locationId = $(this).attr("data-locationId");
 							$("#LocationId", $("#addSpot_modal")).val(
 									locationId);
 						})
-
+				
 				$(".editFilm").click(
 						function() {
 							var filmMetaId = $(this).closest("tr").attr(
 									"data-filmMetaId");
 							module.GetFilmModal(filmMetaId);
 						})
-
+						
+				$(".editLocation").click(
+						function() {
+							var filmMetaId = $(this).closest("tr").attr(
+									"data-filmMetaId");
+							module.GetFilmModal(filmMetaId);
+						})
+						
+				//OBSOLETE
 				// Bind nav buttons
 				$(".formNavButton").click(function(e) {
 					var id = $(this).attr("data-formId");
@@ -265,7 +297,7 @@ var _formForViktor = undefined;
 					module.ActivateNavButtons(id);
 					e.preventDefault();
 				})
-
+				//OBSOLETE
 				$(".saveJson").click(
 						function(e) {
 							var activeFormID = $(".ft_formelement.active")
@@ -309,10 +341,18 @@ var _formForViktor = undefined;
 
 			});
 
+	module.hideInners = function(){
+		$(".inner-rows").hide();
+	}
+	
+	module.toggleInners = function(outer){
+		$(outer).next($(".inner-rows")).toggle(200);
+	}
+	
 	// Film list ajax
 	module.GetFilmModal = function(filmMetaId) {
 		$.ajax({
-			url : "addmovie2/getfilmmetabyid",
+			url : "movies/getfilmmetabyid",
 			data : {
 				id : filmMetaId
 			},
@@ -326,21 +366,21 @@ var _formForViktor = undefined;
 			}
 		})
 	}
-
+	//OBSOLETE
 	module.deleteRow = function() {
 		$(this).closest('tr').remove();
 	}
-
+	//OBSOLETE
 	module.ActivateNavButtons = function(buttonId) {
 		$(".formNavButton").removeClass("active");
 		$("#" + buttonId + "Button").addClass("active");
 	}
-
+	//OBSOLETE
 	module.HideForms = function(formId) {
 		$(".formElement").removeClass("active");
 		$("#" + formId).addClass("active");
 	}
-
+	//OBSOLETE
 	module.AddSpot = function() {
 		var spotTable = $(".myTable");
 		var spotRow = $("<tr></tr>");
@@ -372,7 +412,7 @@ var _formForViktor = undefined;
 		spotTable.append(spotRow);
 
 	}
-
+	//OBSOLETE
 	module.serializeFormJSON = function(form) {
 
 		var o = {};

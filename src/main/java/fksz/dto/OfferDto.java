@@ -6,6 +6,7 @@ public class OfferDto {
 	private CutDto cut;
 	private SpotDto spot;
 	private String description;
+	private String lastModifiedTime;
 	private UserDto partner;
 	
 	public OfferDto() {}
@@ -39,6 +40,14 @@ public class OfferDto {
 
 	public void setSpot(SpotDto spot) {
 		this.spot = spot;
+	}
+
+	public String getLastModifiedTime() {
+		return lastModifiedTime;
+	}
+
+	public void setLastModifiedTime(String lastModifiedTime) {
+		this.lastModifiedTime = lastModifiedTime;
 	}
 
 	public String getDescription() {

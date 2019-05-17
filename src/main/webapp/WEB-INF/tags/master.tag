@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <c:set var="req" value="${pageContext.request}" />
 <c:set var="uri" value="${req.requestURI}" />
 <c:set var="url">${req.requestURL}</c:set>
@@ -82,7 +83,7 @@ _________________________________________________________ -->
 				<div class="container">
 					<div class="row">
 						<div class="col-xs-5 contact">
-							<p class="hidden-sm hidden-xs">A Filmklub Mozgalom független civil háttérszervezete.</p>
+							<p class="hidden-sm hidden-xs">A Magyar Filmklub Mozgalom független civil háttérszervezete.</p>
 							<p class="hidden-md hidden-lg">
 								<a href="#" data-animate-hover="pulse"><i
 									class="fa fa-phone"></i></a> <a href="#" data-animate-hover="pulse"><i
@@ -104,6 +105,9 @@ _________________________________________________________ -->
 									</a>
 								</c:if>
 								<c:if test="${not empty homepageModel.logoutUrl}">
+									<a href="<c:url value="/profile"/>">
+										<i class="fa fa-lock"></i> <span class="hidden-xs text-uppercase">Jelszóváltoztatás</span>
+									</a>
 									<a href="<c:url value='${homepageModel.logoutUrl}' />"> <i
 										class="fa fa-sign-in"></i> <span
 										class="hidden-xs text-uppercase">Kijelentkezés</span>
@@ -149,9 +153,11 @@ _________________________________________________________ -->
                             <ul class="nav navbar-nav navbar-right">
 								<li class="nav-extra-container">
 								<div class="dropdown">
+									<security:authorize access="hasAnyRole('ROLE_ADMIN,ROLE_VENDOR')">
 									<button class="btn btn-secondary dropdown-toggle extra-button" type="button" id="filmExtraDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 										<i class="fa fa-film fa-2x"></i></br>Kópiák
 									</button>
+									</security:authorize>
 									<div class="dropdown-menu dropdown-extra" aria-labelledby="filmExtraDropdown">
 										<a class="btn btn-secondary dropdown-toggle extra-button" href="<c:url value="/movies" />">
 											<i class="fa fa-pie-chart fa-2x"></i></br>Összes
@@ -163,9 +169,11 @@ _________________________________________________________ -->
 									</div>
 								</div>
 								<div class="dropdown">
+									<security:authorize access="hasAnyRole('ROLE_ADMIN,ROLE_VENDOR')">
 									<button class="btn btn-secondary dropdown-toggle extra-button" type="button" id="locationExtraDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 										<i class="fa fa-map-marker fa-2x"></i></br>Termek
 									</button>
+									</security:authorize>
 									<div class="dropdown-menu dropdown-extra" aria-labelledby="filmExtraDropdown">
 										<a class="btn btn-secondary dropdown-toggle extra-button" href="<c:url value="/locations" />">
 											<i class="fa fa-pie-chart fa-2x"></i></br>Összes
@@ -176,7 +184,9 @@ _________________________________________________________ -->
 										</a>
 									</div>
 								</div>
+									<security:authorize access="hasAnyRole('ROLE_ADMIN,ROLE_VENDOR')">
 									<button id="userList" class="btn btn-secondary dropdown-toggle extra-button" ><i class="fa fa-group fa-2x"></i></br>Tagok</button>
+									</security:authorize>
 								</li>
 								<li class="dropdown active"><a href="javascript: void(0)"
 									class="dropdown-toggle" data-toggle="dropdown">Hírek</a>
