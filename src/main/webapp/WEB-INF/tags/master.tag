@@ -184,8 +184,10 @@ _________________________________________________________ -->
 										</a>
 									</div>
 								</div>
-									<security:authorize access="hasAnyRole('ROLE_ADMIN,ROLE_VENDOR')">
-									<button id="userList" class="btn btn-secondary dropdown-toggle extra-button" ><i class="fa fa-group fa-2x"></i></br>Tagok</button>
+									<security:authorize access="hasAnyRole('ROLE_ADMIN')">
+									<button id="userList" class="btn btn-secondary dropdown-toggle extra-button" >
+										<i class="fa fa-group fa-2x"></i></br>Tagok
+									</button>
 									</security:authorize>
 								</li>
 								<li class="dropdown active"><a href="javascript: void(0)"

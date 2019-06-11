@@ -17,7 +17,7 @@
         </div>
         
     <!-- SPOT OFFER LIST -->
-	<div class="container table-container movieTable">
+	<div class="container table-container offerTable">
 			<div class="row outer-header-row">
 			<div class="col-md-offset-1 col-md-2">Partner</div>
 			<div class="col-md-3">Helyszín</div>
