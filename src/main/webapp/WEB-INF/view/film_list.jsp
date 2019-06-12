@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <t:master>
 	
@@ -112,7 +112,7 @@
 		</div>
 		<c:forEach var="filmMetaModel" items="${filmMetaModels}" varStatus="loopStatus">
 			<div class="row outer-table-row ${loopStatus.index % 2 == 0 ? 'even' : ''}">
-				<div class="col-md-offset-1 col-md-1"><span class="expandButton"> <i class="fa fa-angle-down fa-2x"> </i></span></div>
+				<div class="col-md-offset-1 col-md-1">(${fn:length(filmMetaModel.cuts)}) <span class="expandButton"> <i class="fa fa-angle-down fa-2x middle"> </i></span></div>
 				<div class="col-md-5"><c:out value="${filmMetaModel.title} (${filmMetaModel.hungarianTitle})"></c:out></div>
 				<div class="col-md-3"><c:out value="${filmMetaModel.director}"></c:out></div>
 				<div class="col-md-1">
@@ -138,7 +138,7 @@
 						<div class="col-md-offset-2 col-md-3 cut-title">
 							<span><c:out value="${cutModel.title}"></c:out></span>
 							<c:if test="${not empty cutModel.hungarianTitle}">
-								<span><c:out value="${cutModel.hungarianTitle}"></c:out></span>
+								<span class="x-small"><c:out value="${cutModel.hungarianTitle}"></c:out></span>
 							</c:if>
 						</div>
 						<div class="col-md-1"><c:out value="${cutModel.year}"></c:out></div>

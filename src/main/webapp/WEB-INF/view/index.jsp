@@ -46,7 +46,7 @@
                             <div class="item">
                                 <div class="icon"><i class="fa fa-align-justify"></i>
                                 </div>
-                                <h4><span class="counter">80</span><br>tematika</h4>
+                                <h4><span class="counter">60</span><br>tematika</h4>
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-6">
@@ -71,7 +71,7 @@
         
         
 
-        <section class="bar background-gray no-mb">
+        <section class="bar background-white no-mb">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">

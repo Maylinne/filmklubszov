@@ -352,3 +352,11 @@ div.row.hrrow {
 	text-overflow: ellipsis;
 	 white-space: nowrap;
 }
+
+.x-small {
+  font-size: 80%;
+}
+
+.middle {
+  vertical-align: middle;
+}

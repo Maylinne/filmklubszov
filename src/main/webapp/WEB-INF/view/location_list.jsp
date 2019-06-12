@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <t:master>
 	<!-- GRAY HEADER -->
@@ -32,7 +32,7 @@
 		
 		<c:forEach var="locationModel" items="${locationModels}" varStatus="loopStatus">
 			<div class="row outer-table-row ${loopStatus.index % 2 == 0 ? 'even' : ''}">
-				<div class="col-md-offset-1 col-md-1"><span class="expandButton"> <i class="fa fa-angle-down fa-2x"> </i></span></div>
+				<div class="col-md-offset-1 col-md-1">(${fn:length(locationModel.spots)}) <span class="expandButton"> <i class="fa fa-angle-down fa-2x middle"> </i></span></div>
 				<div class="col-md-3"><c:out value="${locationModel.name} "></c:out></div>
 				<div class="col-md-5"><c:out value="(${locationModel.city}) ${locationModel.address}"></c:out></div>
 				<div class="col-md-1">

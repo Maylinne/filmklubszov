@@ -160,8 +160,8 @@ public class UserService implements UserDetailsService {
 			System.out.println("Couldn't send the mail." + e.getMessage());
 		}
 		*/
-		String senderMail = "magyarfilmklubszovetseg@gmail.com";
-		String password = "filmklub2020";
+		String senderMail = "filmklubreg@gmail.com";
+		String password = "FilmKlubReg2020";
 
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");

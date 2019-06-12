@@ -35,8 +35,8 @@
 				<div class="row outer-table-row ${allLoopStatus.index % 2 == 0 ? 'even' : ''}">
 					<div class="col-md-offset-1 col-md-2"><c:out value="${cutOfferModel.partner.name} "></c:out></div>
 					<div class="col-md-4 offer-cut-title">
-						<span><c:out value="${cutOfferModel.cut.filmMetaHungarianTitle} (${cutOfferModel.cut.hungarianTitle})"></c:out></span>
 						<span><c:out value="${cutOfferModel.cut.filmMetaTitle} (${cutOfferModel.cut.title})"></c:out></span>
+						<span class="x-small"><c:out value="${cutOfferModel.cut.filmMetaHungarianTitle} (${cutOfferModel.cut.hungarianTitle})"></c:out></span>
 					</div>
 					<div class="col-md-1 lm-date"><c:out value="${cutOfferModel.lastModifiedTime}"></c:out></div>
 					<div class="col-md-2 description"><c:out value="${cutOfferModel.description} "></c:out></div>
@@ -48,15 +48,14 @@
 				</div>
 			</c:forEach>
 		</c:if>
-		
-						
+					
 		<c:if test="${isMine}">
 			<c:forEach var="cutOfferModel" items="${myCutOfferModels.offers}" varStatus="mineLoopStatus">
 				<div class="row outer-table-row ${mineLoopStatus.index % 2 == 0 ? 'even' : ''}">
 					<div class="col-md-offset-1 col-md-2"><c:out value="${cutOfferModel.partner.name} "></c:out></div>
 					<div class="col-md-4 offer-cut-title">
-						<span><c:out value="${cutOfferModel.cut.filmMetaHungarianTitle} (${cutOfferModel.cut.hungarianTitle})"></c:out></span>
 						<span><c:out value="${cutOfferModel.cut.filmMetaTitle} (${cutOfferModel.cut.title})"></c:out></span>
+						<span class="x-small"><c:out value="${cutOfferModel.cut.filmMetaHungarianTitle} (${cutOfferModel.cut.hungarianTitle})"></c:out></span>
 					</div>
 					<div class="col-md-1 lm-date"><c:out value="${cutOfferModel.lastModifiedTime}"></c:out></div>
 					<div class="col-md-2 description" title="${cutOfferModel.description}"><c:out value="${cutOfferModel.description} "></c:out></div>

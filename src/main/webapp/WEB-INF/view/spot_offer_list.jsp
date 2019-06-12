@@ -20,9 +20,9 @@
 	<div class="container table-container offerTable">
 			<div class="row outer-header-row">
 			<div class="col-md-offset-1 col-md-2">Partner</div>
-			<div class="col-md-3">Helyszín</div>
+			<div class="col-md-4">Helyszín</div>
 			<div class="col-md-1">Beküldve</div>
-			<div class="col-md-2">Leírás</div>
+			<div class="col-md-1">Leírás</div>
 			<div class="button-div col-md-2">
 				<a href="#" class="btn btn-template-main list-header-btn" data-toggle="modal" data-target="#addSpotOffer_modal">
 					<span class="addButtonText">Új ajánlat</span>
@@ -34,9 +34,9 @@
 			<c:forEach var="spotOfferModel" items="${spotOfferModels}" varStatus="allLoopStatus">
 				<div class="row outer-table-row ${allLoopStatus.index % 2 == 0 ? 'even' : ''}">
 					<div class="col-md-offset-1 col-md-2"><c:out value="${spotOfferModel.partner.name} "></c:out></div>
-					<div class="col-md-3"><c:out value="${spotOfferModel.spot.locationName} (${spotOfferModel.spot.name})"></c:out></div>
+					<div class="col-md-4"><c:out value="${spotOfferModel.spot.locationName} (${spotOfferModel.spot.name})"></c:out></div>
 					<div class="col-md-1 lm-date"><c:out value="${spotOfferModel.lastModifiedTime}"></c:out></div>
-					<div class="col-md-3 description" title="${spotOfferModel.description}"><c:out value="${spotOfferModel.description}"></c:out></div>
+					<div class="col-md-2 description" title="${spotOfferModel.description}"><c:out value="${spotOfferModel.description}"></c:out></div>
 					<div class="col-md-1">
 						<security:authorize access="hasRole('ROLE_ADMIN')">
 							<span class="listAction deleteOffer" data-offerId="${spotOfferModel.id}"><i class="fa fa-trash-o"></i></span>
@@ -51,9 +51,9 @@
 			<c:forEach var="spotOfferModel" items="${mySpotOfferModels}" varStatus="mineLoopStatus">
 				<div class="row outer-table-row ${mineLoopStatus.index % 2 == 0 ? 'even' : ''}">
 					<div class="col-md-offset-1 col-md-2"><c:out value="${spotOfferModel.partner.name} "></c:out></div>
-					<div class="col-md-3"><c:out value="${spotOfferModel.spot.locationName} (${spotOfferModel.spot.name})"></c:out></div>
+					<div class="col-md-4"><c:out value="${spotOfferModel.spot.locationName} (${spotOfferModel.spot.name})"></c:out></div>
 					<div class="col-md-1 lm-date"><c:out value="${spotOfferModel.lastModifiedTime}"></c:out></div>
-					<div class="col-md-3 description" title="${spotOfferModel.description}"><c:out value="${spotOfferModel.description} "></c:out></div>
+					<div class="col-md-2 description" title="${spotOfferModel.description}"><c:out value="${spotOfferModel.description} "></c:out></div>
 					<div class="col-md-1">
 						<span class="listAction deleteOffer" data-offerId="${spotOfferModel.id}"><i class="fa fa-trash-o"></i></span>
 					</div>
