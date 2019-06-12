@@ -152,7 +152,7 @@ public class UserService implements UserDetailsService {
 	//@SuppressWarnings("static-access")
 	public void sendRegisterEmail(String email, String emailBody, UserDto user) throws MessagingException {
 		/*
-		MimeMessage generatedMessage = gmailUtils.createEmail(user.getEmail(), "magyarfilmklubszovetseg@gmail.com", "filmklubszov.hu regisztráció", emailBody);
+		MimeMessage generatedMessage = gmailUtils.createEmail(user.getEmail(), "filmklubreg@gmail.com", "filmklubszov.hu regisztráció", emailBody);
 		
 		try {
 			gmailUtils.sendMessage(generatedMessage);
