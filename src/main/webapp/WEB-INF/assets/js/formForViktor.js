@@ -38,7 +38,7 @@ var _formForViktor = undefined;
 
 				$(".userTable").on("click", ".deleteUser", function() {
 					var userId = $(this).attr("data-userId");
-					var loc = window.location.origin + "/fksz/users";
+					var loc = window.location.origin + "/users";
 					_dialogHelper.ShowConfirmation("Törlés megerősitése", "Biztos, hogy törölni akarod a felhasználót?", function(){
 						$.ajax({
 							method : "POST",
@@ -78,7 +78,7 @@ var _formForViktor = undefined;
 				
 				$(".locationTable").on("click", ".deleteLocation", function() {
 					var locationId = $(this).attr("data-locationId");
-					var loc = window.location.origin + "/fksz/locations";
+					var loc = window.location.origin + "/locations";
 					_dialogHelper.ShowConfirmation("Törlés megerősitése", "Biztos, hogy törölni akarod a helyszint?", function(){
 						$.ajax({
 							method : "POST",
@@ -100,7 +100,7 @@ var _formForViktor = undefined;
 				$(".locationTable").on("click", ".deleteSpot", function() {
 					var spotId = $(this).attr("data-spotId");
 					var locationId = $(this).attr("data-locationId");
-					var loc = window.location.origin + "/fksz/locations?locationid=" + locationId;
+					var loc = window.location.origin + "/locations?locationid=" + locationId;
 					_dialogHelper.ShowConfirmation("Törlés megerősitése", "Biztos, hogy törölni akarod a termet?", function(){	
 						$.ajax({
 							method : "POST",
@@ -121,7 +121,7 @@ var _formForViktor = undefined;
 				
 				$(".movieTable").on("click", ".deleteFilm", function() {
 					var filmMetaId = $(this).attr("data-filmMetaId");
-					var loc = window.location.origin + "/fksz/movies";
+					var loc = window.location.origin + "/movies";
 					_dialogHelper.ShowConfirmation("Törlés megerősitése", "Biztos, hogy törölni akarod a filmet?", function(){
 						$.ajax({
 							method : "POST",
@@ -143,7 +143,7 @@ var _formForViktor = undefined;
 				$(".movieTable").on("click", ".deleteCut", function() {
 					var cutId = $(this).attr("data-cutId");
 					var filmMetaId = $(this).attr("data-filmMetaId");
-					var loc = window.location.origin + "/fksz/movies?filmMetaId=" + filmMetaId;
+					var loc = window.location.origin + "/movies?filmMetaId=" + filmMetaId;
 					_dialogHelper.ShowConfirmation("Törlés megerősitése", "Biztos, hogy törölni akarod akópiát?", function(){
 						$.ajax({
 							method : "POST",
@@ -220,7 +220,7 @@ var _formForViktor = undefined;
 				$(".locationTable").on("click", ".editSpot", function() {
 					var spotId = $(this).attr("data-spotId");
 					var locationId = $(this).attr("data-locationId");
-					var loc = window.location.origin + "/fksz/locations?locationid=" + locationId;
+					var loc = window.location.origin + "/locations?locationid=" + locationId;
 					$.ajax({
 						method : "POST",
 						url : "locations/editspotdialogpost",
@@ -263,7 +263,7 @@ var _formForViktor = undefined;
 				$(".movieTable").on("click", ".editCut", function() {
 					var cutId = $(this).attr("data-cutId");
 					var locationId = $(this).attr("data-locationId");
-					var loc = window.location.origin + "/fksz/movies?filmmetaid=" + locationId;
+					var loc = window.location.origin + "/movies?filmmetaid=" + locationId;
 					$.ajax({
 						method : "POST",
 						url : "movies/editcutdialogpost",
