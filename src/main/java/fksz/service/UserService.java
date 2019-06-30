@@ -13,6 +13,8 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.naming.Context;
+import javax.naming.InitialContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -40,7 +42,7 @@ public class UserService implements UserDetailsService {
 
 	@Autowired
 	BCryptPasswordEncoder pswEncoder;
-
+	
 	public void save(UserDto dto) {
 		dao.save(transformer.dtoToEntity(dto));
 	}
@@ -144,6 +146,7 @@ public class UserService implements UserDetailsService {
 		System.out.println(emailBody);
 		return emailBody;
 	}
+	
 
 	public void sendRegisterEmail(String email, String emailBody, UserDto user) throws MessagingException {
 	
