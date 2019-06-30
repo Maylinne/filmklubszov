@@ -52,7 +52,7 @@ public class DocumentController extends MasterController {
 			
 			respEnt = new ResponseEntity(responseArray.toByteArray(), responseHeaders, HttpStatus.OK);
 		} catch (Exception e) {
-			System.out.println(e + "Exception van, köcsög!");
+			System.out.println(e);
 		}
 		
 		return respEnt;
