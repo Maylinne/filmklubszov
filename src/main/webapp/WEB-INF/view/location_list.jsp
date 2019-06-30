@@ -32,7 +32,7 @@
 		
 		<c:forEach var="locationModel" items="${locationModels}" varStatus="loopStatus">
 			<div class="row outer-table-row ${loopStatus.index % 2 == 0 ? 'even' : ''}">
-				<div class="col-md-offset-1 col-md-1">(${fn:length(locationModel.spots)}) <span class="expandButton"> <i class="fa fa-angle-down fa-2x middle"> </i></span></div>
+				<div class="col-md-offset-1 col-md-1">(${fn:length(locationModel.spots)}) <span class="expandButton" data-locationId="${locationModel.id}"> <i class="fa fa-angle-down fa-2x middle"> </i></span></div>
 				<div class="col-md-3"><c:out value="${locationModel.name} "></c:out></div>
 				<div class="col-md-5"><c:out value="(${locationModel.city}) ${locationModel.address}"></c:out></div>
 				<div class="col-md-1">
@@ -58,8 +58,8 @@
 						<div class="col-md-5"><c:out value="${spotModel.places}"></c:out></div>
 						<div class="col-md-1">
 							<security:authorize access="hasRole('ROLE_ADMIN')">
-								<span class="listAction deleteSpot" data-spotId="${spotModel.id}"><i class="fa fa-trash-o"></i></span> 
-								<span class="listAction editSpot" data-spotId="${spotModel.id}"><i class="fa fa-edit"></i></span>
+								<span class="listAction deleteSpot" data-spotId="${spotModel.id}" data-locationId="${locationModel.id}"><i class="fa fa-trash-o"></i></span> 
+								<span class="listAction editSpot" data-spotId="${spotModel.id}" data-locationId="${locationModel.id}"><i class="fa fa-edit"></i></span>
 							</security:authorize>
 						</div>
 					</div>		

@@ -112,7 +112,7 @@
 		</div>
 		<c:forEach var="filmMetaModel" items="${filmMetaModels}" varStatus="loopStatus">
 			<div class="row outer-table-row ${loopStatus.index % 2 == 0 ? 'even' : ''}">
-				<div class="col-md-offset-1 col-md-1">(${fn:length(filmMetaModel.cuts)}) <span class="expandButton"> <i class="fa fa-angle-down fa-2x middle"> </i></span></div>
+				<div class="col-md-offset-1 col-md-1">(${fn:length(filmMetaModel.cuts)}) <span class="expandButton" data-filmMetaId="${filmMetaModel.id}"> <i class="fa fa-angle-down fa-2x middle"> </i></span></div>
 				<div class="col-md-5"><c:out value="${filmMetaModel.title} (${filmMetaModel.hungarianTitle})"></c:out></div>
 				<div class="col-md-3"><c:out value="${filmMetaModel.director}"></c:out></div>
 				<div class="col-md-1">
@@ -145,8 +145,8 @@
 						<div class="col-md-4"><c:out value="${cutModel.length}"></c:out></div>
 						<div class="col-md-1">
 							<security:authorize access="hasRole('ROLE_ADMIN')">
-								<span class="listAction deleteCut" data-cutId="${cutModel.cutId}"><i class="fa fa-trash-o"></i></span> 
-								<span class="listAction editCut" data-cutId="${cutModel.cutId}"><i class="fa fa-edit"></i></span>
+								<span class="listAction deleteCut" data-cutId="${cutModel.cutId}" data-filmMetaId="${filmMetaModel.id}"><i class="fa fa-trash-o"></i></span> 
+								<span class="listAction editCut" data-cutId="${cutModel.cutId}" data-filmMetaId="${filmMetaModel.id}"><i class="fa fa-edit"></i></span>
 							</security:authorize>
 						</div>
 					</div>		

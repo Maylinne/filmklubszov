@@ -70,7 +70,7 @@ public class MovieController extends MasterController {
 	@RequestMapping(value="/addcut", method=RequestMethod.POST)
 	public String saveFilmMeta (CutRequest cutRequest, BindingResult bindingResult) {
 		cutService.save(cutTransformer.requestToDto(cutRequest));
-		return "redirect:/movies";
+		return "redirect:/movies?filmMetaId=" + cutRequest.getFilmMetaId();
 	}
 	
 	@ResponseBody

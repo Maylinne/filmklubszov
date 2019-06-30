@@ -3,6 +3,27 @@ var _formForViktor = undefined;
 (function(module) {
 	$(document).ready(
 			function() {
+				module.hideInners();
+				
+				var params = window.location.href.split("?").pop();
+				if(params) {
+					var param = params.split("=");
+					if(param.length == 2 && param[0] == "filmMetaId") {
+						var button = $(".expandButton[data-filmmetaid='" + param[1] + "']");
+						module.toggleInners(button.closest(".outer-table-row"));
+						$("i", button).toggleClass("reverse");
+					}
+				}
+				
+				var spotParams = window.location.href.split("?").pop();
+				if(spotParams) {
+					var spotParam = spotParams.split("=");
+					if(spotParam.length == 2 && spotParam[0] == "locationid") {
+						var button = $(".expandButton[data-locationid='" + spotParam[1] + "']");
+						module.toggleInners(button.closest(".outer-table-row"));
+						$("i", button).toggleClass("reverse");
+					}
+				}
 				
 				if($("#serverNotifMessage").html() && $("#serverNotifType").html()) {
 					var notif = $(".serverNotification");
@@ -78,7 +99,8 @@ var _formForViktor = undefined;
 				
 				$(".locationTable").on("click", ".deleteSpot", function() {
 					var spotId = $(this).attr("data-spotId");
-					var loc = window.location.origin + "/fksz/locations";
+					var locationId = $(this).attr("data-locationId");
+					var loc = window.location.origin + "/fksz/locations?locationid=" + locationId;
 					_dialogHelper.ShowConfirmation("Törlés megerősitése", "Biztos, hogy törölni akarod a termet?", function(){	
 						$.ajax({
 							method : "POST",
@@ -120,7 +142,8 @@ var _formForViktor = undefined;
 				
 				$(".movieTable").on("click", ".deleteCut", function() {
 					var cutId = $(this).attr("data-cutId");
-					var loc = window.location.origin + "/fksz/movies";
+					var filmMetaId = $(this).attr("data-filmMetaId");
+					var loc = window.location.origin + "/fksz/movies?filmMetaId=" + filmMetaId;
 					_dialogHelper.ShowConfirmation("Törlés megerősitése", "Biztos, hogy törölni akarod akópiát?", function(){
 						$.ajax({
 							method : "POST",
@@ -196,7 +219,8 @@ var _formForViktor = undefined;
 				
 				$(".locationTable").on("click", ".editSpot", function() {
 					var spotId = $(this).attr("data-spotId");
-					var loc = window.location.href;
+					var locationId = $(this).attr("data-locationId");
+					var loc = window.location.origin + "/fksz/locations?locationid=" + locationId;
 					$.ajax({
 						method : "POST",
 						url : "locations/editspotdialogpost",
@@ -238,7 +262,8 @@ var _formForViktor = undefined;
 				
 				$(".movieTable").on("click", ".editCut", function() {
 					var cutId = $(this).attr("data-cutId");
-					var loc = window.location.href;
+					var locationId = $(this).attr("data-locationId");
+					var loc = window.location.origin + "/fksz/movies?filmmetaid=" + locationId;
 					$.ajax({
 						method : "POST",
 						url : "movies/editcutdialogpost",
@@ -258,8 +283,6 @@ var _formForViktor = undefined;
 						}
 					});
 				})
-				
-				module.hideInners();
 
 				// Bind list buttons
 				$(".expandButton").click(function() {

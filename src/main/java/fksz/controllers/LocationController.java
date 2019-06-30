@@ -116,7 +116,7 @@ public class LocationController extends MasterController {
 	@RequestMapping(value="/addspot", method=RequestMethod.POST)
 	public String saveSpot (SpotRequest spotRequest, BindingResult bindingResult) {
 		spotService.save(spotTransformer.requestToDto(spotRequest));
-		return "redirect:/locations";
+		return "redirect:/locations?locationid=" + spotRequest.getLocationId();
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)
