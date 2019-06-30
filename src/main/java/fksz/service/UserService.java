@@ -165,7 +165,7 @@ public class UserService implements UserDetailsService {
 		try {
 
 			MimeMessage message = new MimeMessage(session);
-			message.setFrom(new InternetAddress("nagy.anasztazia@gmail.com"));
+			message.setFrom(new InternetAddress("filmklubreg@gmail.com"));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
 			message.setSubject("filmklubszov.hu regisztráció");
 			message.setText(emailBody, "UTF-8", "html");
