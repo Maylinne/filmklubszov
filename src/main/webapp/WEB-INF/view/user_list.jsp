@@ -50,6 +50,11 @@
 	</div>
 	<!-- USER LIST END -->
     
+    <div style="display:none">
+    	<span id="serverNotifMessage">${notification}</span>
+    	<span id="serverNotifType">${notificationType}</span>
+    </div>
+    
     <!-- USER MODAL -->
 	<div class="container">
 		
@@ -59,7 +64,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="AddUser">Felhasználó hozzáadása/szerkesztése</h4>
+                        <h4 class="modal-title" id="AddUser">Felhasználó hozzáadása / szerkesztése</h4>
                     </div>
                     <div class="modal-body">
                          <form:form modelAttribute="userRequest" action="users/adduserpost" method="post">
@@ -83,6 +88,7 @@
                 </div>
             </div>
         </div>
+
 
 	</div>
 	<!-- USER MODAL END -->

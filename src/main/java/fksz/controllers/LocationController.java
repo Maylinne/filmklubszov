@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -61,13 +60,13 @@ public class LocationController extends MasterController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/deletelocationpost", method=RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value="/deletelocationpost", method=RequestMethod.POST)
 	public String deleteLocation (int locationId) {
 		if (!locationService.getById(locationId).getSpots().isEmpty()) {
-			return JSONObject.quote("Torold elobb a helyszinhez tartozo termeket!");
+			return "Torold elobb a helyszinhez tartozo termeket!";
 		} else {
 			locationService.deleteById(locationId);
-			return JSONObject.quote("A helyszin torolve a rendszerbol");
+			return "";
 		}
 	}
 	
@@ -84,13 +83,13 @@ public class LocationController extends MasterController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/deletespotpost", method=RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value="/deletespotpost", method=RequestMethod.POST)
 	public String deleteSpot (int spotId) {
 		if (!offerSevice.getAllBySpotId(spotId).isEmpty()) {
-			return JSONObject.quote("Elobb torold az ezt a termet tartalmazo offereket!");
+			return "Elobb torold az ezt a termet tartalmazo offereket!";
 		} else {
 			spotService.deleteById(spotId);
-			return JSONObject.quote("A helyszin torolve a rendszerbol");
+			return "";
 		}
 	}
 	

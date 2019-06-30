@@ -3,7 +3,7 @@ package fksz.models;
 import java.util.ArrayList;
 
 
-public class UserModel {
+public class UserModel extends BaseModel{
 	
 	private int id;
 	private String email;

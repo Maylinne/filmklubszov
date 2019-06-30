@@ -74,13 +74,13 @@ public class MovieController extends MasterController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/deletemoviepost", method=RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value="/deletemoviepost", method=RequestMethod.POST)
 	public String deleteFilmMeta (int filmMetaId) {
 		if (!filmMetaService.getById(filmMetaId).getCuts().isEmpty()) {
-			return JSONObject.quote("Torold elobb a filmhez tartozo kopiakat!");
+			return "Torold elobb a filmhez tartozo kopiakat!";
 		} else {
 			filmMetaService.deleteById(filmMetaId);
-			return JSONObject.quote("A film torolve a rendszerbol");
+			return "";
 		}
 	}
 	
@@ -97,13 +97,13 @@ public class MovieController extends MasterController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/deletecutpost", method=RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value="/deletecutpost", method=RequestMethod.POST)
 	public String deleteCut (int cutId) {
 		if (!offerService.getAllByCutId(cutId).isEmpty()) {
-			return JSONObject.quote("Elobb torold az ezt a kopiat tartalmazo offereket!");
+			return "Elobb torold az ezt a kopiat tartalmazo offereket!";
 		} else {
 			cutService.deleteById(cutId);
-			return JSONObject.quote("A kopia torolve a rendszerbol");
+			return "";
 		}
 	}
 	

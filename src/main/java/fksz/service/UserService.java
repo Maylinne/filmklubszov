@@ -26,7 +26,6 @@ import fksz.domain.MyUserPrincipal;
 import fksz.domain.User;
 import fksz.domain.UserStatus;
 import fksz.dto.UserDto;
-import fksz.googletools.GmailUtils;
 import fksz.requests.ChangePswRequest;
 import fksz.transformers.UserTransformer;
 
@@ -41,9 +40,6 @@ public class UserService implements UserDetailsService {
 
 	@Autowired
 	BCryptPasswordEncoder pswEncoder;
-	
-	@Autowired
-	GmailUtils gmailUtils;
 
 	public void save(UserDto dto) {
 		dao.save(transformer.dtoToEntity(dto));
@@ -118,7 +114,7 @@ public class UserService implements UserDetailsService {
 		boolean isNewPswLongEnough = request.getNewPsw().length() >= 8;
 		boolean areNewPswsTheSame = request.getNewPsw().equals(request.getNewPswAgain());
 		if(!isOldPswOk) {
-			return "A Régi jelszó nem egyezik meg a jelenlegivel";
+			return "A régi jelszó nem egyezik meg a jelenlegivel";
 		}else if (!isNewPswLongEnough) {
 			return "Az új jelszó nem elég hosszú.";
 		} else if (!areNewPswsTheSame) {
@@ -149,17 +145,8 @@ public class UserService implements UserDetailsService {
 		return emailBody;
 	}
 
-	//@SuppressWarnings("static-access")
 	public void sendRegisterEmail(String email, String emailBody, UserDto user) throws MessagingException {
-		/*
-		MimeMessage generatedMessage = gmailUtils.createEmail(user.getEmail(), "filmklubreg@gmail.com", "filmklubszov.hu regisztráció", emailBody);
-		
-		try {
-			gmailUtils.sendMessage(generatedMessage);
-		} catch (IOException e) {
-			System.out.println("Couldn't send the mail." + e.getMessage());
-		}
-		*/
+	
 		String senderMail = "filmklubreg@gmail.com";
 		String password = "FilmKlubReg2020";
 
@@ -183,13 +170,12 @@ public class UserService implements UserDetailsService {
 			message.setSubject("filmklubszov.hu regisztráció");
 			message.setText(emailBody, "UTF-8", "html");
 			
-			//Message messageWithEmail = gmailUtils.createMessageWithEmail(message);
-
 			Transport.send(message);
 
 			System.out.println("Done");
 
 		} catch (MessagingException e) {
+			System.out.println("The message cannot be sent.");
 			throw new RuntimeException(e);
 		}
 		
@@ -214,5 +200,8 @@ public class UserService implements UserDetailsService {
 		return niceRole;
 	}
 
+	public boolean ifUserExistsByEmail(String email) {
+		return dao.findByEmail(email) != null;
+	}
 
 }

@@ -4,21 +4,28 @@ var _formForViktor = undefined;
 	$(document).ready(
 			function() {
 				
+				if($("#serverNotifMessage").html() && $("#serverNotifType").html()) {
+					var notif = $(".serverNotification");
+					notif.addClass("alert-"+$("#serverNotifType").html());
+					$(".notifMessage").html($("#serverNotifMessage").html());
+					notif.show();
+				}
+				
 				$("#userList").on("click", function() {
 					window.location.href=$("head base").attr("href")+"users";
 				})
 
 				$(".userTable").on("click", ".deleteUser", function() {
 					var userId = $(this).attr("data-userId");
-					var loc = window.location.href;
-					_dialogHelper.ShowConfirmation("Törlés megerősitése", "Biztos, hogy törölni akarod az ajánlatot?", function(){
+					var loc = window.location.origin + "/fksz/users";
+					_dialogHelper.ShowConfirmation("Törlés megerősitése", "Biztos, hogy törölni akarod a felhasználót?", function(){
 						$.ajax({
 							method : "POST",
 							url : "users/deleteuserpost",
 							data : {
 								userId : userId
 							},
-							success : function(result) {
+							success : function(data) {
 								if (data == "" || data == null) {
 									window.location.href = loc;
 								} else {
@@ -28,6 +35,7 @@ var _formForViktor = undefined;
 						});
 					});
 				})
+				
 				
 				$(".offerTable").on("click", ".deleteOffer", function() {
 					var offerId = $(this).attr("data-offerId");
@@ -39,7 +47,7 @@ var _formForViktor = undefined;
 							data : {
 								offerId : offerId
 							},
-							success : function(result) {
+							success : function(data) {
 								window.location.href = loc;
 							}
 						});
@@ -49,8 +57,8 @@ var _formForViktor = undefined;
 				
 				$(".locationTable").on("click", ".deleteLocation", function() {
 					var locationId = $(this).attr("data-locationId");
-					var loc = window.location.href;
-					_dialogHelper.ShowConfirmation("Törlés megerősitése", "Biztos, hogy törölni akarod az ajánlatot?", function(){
+					var loc = window.location.origin + "/fksz/locations";
+					_dialogHelper.ShowConfirmation("Törlés megerősitése", "Biztos, hogy törölni akarod a helyszint?", function(){
 						$.ajax({
 							method : "POST",
 							url : "locations/deletelocationpost",
@@ -70,8 +78,8 @@ var _formForViktor = undefined;
 				
 				$(".locationTable").on("click", ".deleteSpot", function() {
 					var spotId = $(this).attr("data-spotId");
-					var loc = window.location.href;
-					_dialogHelper.ShowConfirmation("Törlés megerősitése", "Biztos, hogy törölni akarod az ajánlatot?", function(){	
+					var loc = window.location.origin + "/fksz/locations";
+					_dialogHelper.ShowConfirmation("Törlés megerősitése", "Biztos, hogy törölni akarod a termet?", function(){	
 						$.ajax({
 							method : "POST",
 							url : "locations/deletespotpost",
@@ -91,8 +99,8 @@ var _formForViktor = undefined;
 				
 				$(".movieTable").on("click", ".deleteFilm", function() {
 					var filmMetaId = $(this).attr("data-filmMetaId");
-					var loc = window.location.href;
-					_dialogHelper.ShowConfirmation("Törlés megerősitése", "Biztos, hogy törölni akarod az ajánlatot?", function(){
+					var loc = window.location.origin + "/fksz/movies";
+					_dialogHelper.ShowConfirmation("Törlés megerősitése", "Biztos, hogy törölni akarod a filmet?", function(){
 						$.ajax({
 							method : "POST",
 							url : "movies/deletemoviepost",
@@ -112,8 +120,8 @@ var _formForViktor = undefined;
 				
 				$(".movieTable").on("click", ".deleteCut", function() {
 					var cutId = $(this).attr("data-cutId");
-					var loc = window.location.href;
-					_dialogHelper.ShowConfirmation("Törlés megerősitése", "Biztos, hogy törölni akarod az ajánlatot?", function(){
+					var loc = window.location.origin + "/fksz/movies";
+					_dialogHelper.ShowConfirmation("Törlés megerősitése", "Biztos, hogy törölni akarod akópiát?", function(){
 						$.ajax({
 							method : "POST",
 							url : "movies/deletecutpost",

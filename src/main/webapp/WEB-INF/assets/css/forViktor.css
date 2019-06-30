@@ -360,3 +360,12 @@ div.row.hrrow {
 .middle {
   vertical-align: middle;
 }
+
+.serverNotification
+{
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    width: 20%;
+    border: solid;
+}
