@@ -190,8 +190,8 @@ _________________________________________________________ -->
 									</button>
 									</security:authorize>
 								</li>
-								<li class="dropdown"><a href="javascript: void(0)"
-									class="dropdown-toggle" data-toggle="dropdown">Hírek</a>
+								<li class="dropdown"><a href=""
+									class="dropdown-toggle">Hírek</a>
 
 								</li>
 								<li class="dropdown use-yamm yamm-fw"><a href="#"
