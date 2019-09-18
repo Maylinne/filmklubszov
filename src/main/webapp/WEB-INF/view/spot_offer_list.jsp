@@ -24,9 +24,11 @@
 			<div class="col-md-1">Beküldve</div>
 			<div class="col-md-1">Leírás</div>
 			<div class="button-div col-md-2">
+			<security:authorize access="hasRole('ROLE_ADMIN,ROLE_VENDOR')">
 				<a href="#" class="btn btn-template-main list-header-btn" data-toggle="modal" data-target="#addSpotOffer_modal">
 					<span class="addButtonText">Új ajánlat</span>
 				</a>
+			</security:authorize>
 			</div>
 		</div>
 		
