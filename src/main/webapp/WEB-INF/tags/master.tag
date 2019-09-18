@@ -160,11 +160,11 @@ _________________________________________________________ -->
 									</security:authorize>
 									<div class="dropdown-menu dropdown-extra" aria-labelledby="filmExtraDropdown">
 										<a class="btn btn-secondary dropdown-toggle extra-button" href="<c:url value="/movies" />">
-											<i class="fa fa-pie-chart fa-2x"></i></br>Összes
+											<i class="fa fa-pie-chart fa-2x"></i></br>Filmek
 										</a>
 										<hr class="extra-hr">
 										<a class="btn btn-secondary dropdown-toggle extra-button" href="<c:url value="/offers/mycutoffers" />">
-											<i class="fa fa-copyright fa-2x"></i></br>Saját
+											<i class="fa fa-copyright fa-2x"></i></br>Árlista
 										</a>
 									</div>
 								</div>
@@ -176,17 +176,16 @@ _________________________________________________________ -->
 									</security:authorize>
 									<div class="dropdown-menu dropdown-extra" aria-labelledby="filmExtraDropdown">
 										<a class="btn btn-secondary dropdown-toggle extra-button" href="<c:url value="/locations" />">
-											<i class="fa fa-pie-chart fa-2x"></i></br>Összes
-										</a>
+											<i class="fa fa-pie-chart fa-2x"></i></br>Helyek</a>
 										<hr class="extra-hr">
 										<a class="btn btn-secondary dropdown-toggle extra-button" href="<c:url value="/offers/myspotoffers" />">
-											<i class="fa fa-copyright fa-2x"></i></br>Saját
+											<i class="fa fa-copyright fa-2x"></i></br>Árlista
 										</a>
 									</div>
 								</div>
 									<security:authorize access="hasAnyRole('ROLE_ADMIN')">
 									<button id="userList" class="btn btn-secondary dropdown-toggle extra-button" >
-										<i class="fa fa-group fa-2x"></i></br>Tagok
+										<i class="fa fa-group fa-2x"></i></br>Regek
 									</button>
 									</security:authorize>
 								</li>
@@ -247,7 +246,7 @@ _________________________________________________________ -->
 															klubélet <i class="fa fa-external-link"></i>
 														</h5>
 														<ul>
-															<li><a href="<c:url value="/offers/allspotoffers" />">termek / helyszínek </a></li>
+															<li><a href="<c:url value="/offers/allspotoffers" />">beltér / kültér </a></li>
 															<li><a href="#">technika</a></li>
 															<li><a href="#">üzemeltetők</a></li>
 														</ul>
@@ -317,6 +316,7 @@ _________________________________________________________ -->
                                                             <li><a href="<c:url value="/documents" />">szabályzatok</a></li>
                                                             <li><a href="<c:url value="/documents" />">jegyzőkönyvek</a></li>
                                                             <li><a href="<c:url value="/documents" />">tervezetek</a></li>
+                                                            <li><a href="<c:url value="/documents" />">meghívók</a></li>
 								                        </ul>
 													</div>
 												</div>

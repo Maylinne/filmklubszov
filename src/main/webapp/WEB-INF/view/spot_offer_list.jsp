@@ -91,7 +91,9 @@
 								<form:options items="${spotOfferModel.availableSpots}" />
 							</form:select>
 							</div>
+							<div class="form-group">
 							<form:input path="description" type="text" class="form-control" id="Description" placeholder="Leirás"/>
+							</div>
 							
 							<p class="text-center">
 								<button type="submit" class="btn btn-template-main">
