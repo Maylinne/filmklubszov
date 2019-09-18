@@ -207,7 +207,7 @@ _________________________________________________________ -->
 
 													<div class="col-sm-3">
 														<h5>
-															alkotások <i class="fa fa-external-link"></i>
+															műsor <i class="fa fa-external-link"></i>
 														</h5>
 														<ul>
 															<li><a href="<c:url value="/offers/allcutoffers" />">kopiák / csomagok</a></li>
