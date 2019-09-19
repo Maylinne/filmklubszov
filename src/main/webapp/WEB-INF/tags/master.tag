@@ -207,12 +207,12 @@ _________________________________________________________ -->
 
 													<div class="col-sm-3">
 														<h5>
-															műsor <i class="fa fa-external-link"></i>
+															engedélyek <i class="fa fa-external-link"></i>
 														</h5>
 														<ul>
-															<li><a href="<c:url value="/offers/allcutoffers" />">kopiák / csomagok</a></li>
-															<li><a href="#">jogok</a></li>
+															<li><a href="#">eseti / ernyő</a></li>
 															<li><a href="#">jogtulajdonosok</a></li>
+															<li><a href="<c:url value="/offers/allcutoffers" />">kópiák / előfizetések</a></li>
 														</ul>
 														<h5>
 															vetítések <i class="fa fa-external-link"></i>
@@ -221,10 +221,9 @@ _________________________________________________________ -->
 															<li><a href="#">sorozatok</a></li>
 															<li><a href="#">kurátorok</a></li>
 															<li><a href="#">technikusok</a></li>
-															<li><a href="#">gyik</a></li>
 														</ul>
 													</div>
-
+													
 												</div>
 											</div>
 										</li>
@@ -243,7 +242,7 @@ _________________________________________________________ -->
 
 													<div class="col-sm-3">
 														<h5>
-															klubélet <i class="fa fa-external-link"></i>
+															helyszínek <i class="fa fa-external-link"></i>
 														</h5>
 														<ul>
 															<li><a href="<c:url value="/offers/allspotoffers" />">beltér / kültér </a></li>
@@ -254,10 +253,22 @@ _________________________________________________________ -->
 															beszélgetések <i class="fa fa-external-link"></i>
 														</h5>
 														<ul>
-															<li><a href="#">közösségek</a></li>
 															<li><a href="#">moderátorok</a></li>
-															<li><a href="#">vendégelőadók</a></li>
-															<li><a href="#">gyik</a></li>
+															<li><a href="#">alkotók</a></li>
+															<li><a href="#">előadók</a></li>
+														</ul>
+													</div>
+													<div class="col-sm-3">
+														<h5>
+															közösségek <i class="fa fa-external-link"></i>
+														</h5>
+														<ul>
+															<li><a href="#">Klub 1</a></li>
+															<li><a href="#">Klub 2</a></li>
+															<li><a href="#">Klub 3</a></li>
+															<li><a href="#">Klub 4</a></li>
+															<li><a href="#">Klub 5</a></li>
+															<li><a href="#">...</a></li>
 														</ul>
 													</div>
 
@@ -284,7 +295,7 @@ _________________________________________________________ -->
 														<h5>klubszakma <i class="fa fa-external-link"></i></h5>
 														<ul>
                                                             <li><a href="#">filmterjesztés</a></li>
-                                                            <li><a href="#">szervezőcsapatok / hálozatok</a></li>
+                                                            <li><a href="#">szervezőcsapatok / fenntartók</a></li>
                                                             <li><a href="#">kulturális pályázatok</a></li>
                                                         </ul>
 														<h5>mozgalom <i class="fa fa-external-link"></i></h5>

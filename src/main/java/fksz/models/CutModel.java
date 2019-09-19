@@ -25,7 +25,11 @@ public class CutModel {
 	}
 
 	public String getHungarianTitle() {
-		return hungarianTitle;
+		if(hungarianTitle == null || hungarianTitle.equals("")) {
+			return title;
+		} else {
+			return hungarianTitle;
+		}
 	}
 
 	public void setHungarianTitle(String hungarianTitle) {
@@ -89,7 +93,12 @@ public class CutModel {
 	}
 
 	public String getFilmMetaHungarianTitle() {
-		return filmMetaHungarianTitle;
+		if(filmMetaHungarianTitle == null || filmMetaHungarianTitle.equals("")) {
+			return filmMetaTitle;
+		} else {
+			return filmMetaHungarianTitle;
+		}
+		
 	}
 
 	public void setFilmMetaHungarianTitle(String filmMetaHungarianTitle) {
