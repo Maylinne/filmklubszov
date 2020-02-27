@@ -14,6 +14,7 @@ import fksz.home.view.support.LocalizationUrlBuilder;
 import fksz.i18n.service.LocalizationService;
 
 @Controller
+@RequestMapping("/admin")
 public class AdminController extends MasterController {
 	
 	public static final String REQUEST_MAPPING = "/admin";
