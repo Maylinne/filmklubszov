@@ -207,12 +207,14 @@ _________________________________________________________ -->
 
 													<div class="col-sm-3">
 														<h5>
-															engedélyek <i class="fa fa-external-link"></i>
+															szervezőknek <i class="fa fa-external-link"></i>
 														</h5>
 														<ul>
-															<li><a href="#">eseti / ernyő</a></li>
+															<li><a href="<c:url value="/offers/allcutoffers" />">engedélyek (eseti / ernyő)</a></li>
+															<li><a href="#">hordozók (fiz. kópiák / vod)</a></li>
+															<li><a href="#">fordítások (felirat / hang)</a></li>
 															<li><a href="#">jogtulajdonosok</a></li>
-															<li><a href="<c:url value="/offers/allcutoffers" />">kópiák / előfizetések</a></li>
+															<li><a href="#">kópiák / előfizetések</a></li>
 														</ul>
 														<h5>
 															vetítések <i class="fa fa-external-link"></i>
@@ -242,33 +244,20 @@ _________________________________________________________ -->
 
 													<div class="col-sm-3">
 														<h5>
-															helyszínek <i class="fa fa-external-link"></i>
+															technikusoknak <i class="fa fa-external-link"></i>
 														</h5>
 														<ul>
-															<li><a href="<c:url value="/offers/allspotoffers" />">beltér / kültér </a></li>
+															<li><a href="<c:url value="/offers/allspotoffers" />">helyszinek </a></li>
 															<li><a href="#">technika</a></li>
 															<li><a href="#">üzemeltetők</a></li>
 														</ul>
 														<h5>
-															beszélgetések <i class="fa fa-external-link"></i>
+															házigazdáknak <i class="fa fa-external-link"></i>
 														</h5>
 														<ul>
 															<li><a href="#">moderátorok</a></li>
-															<li><a href="#">alkotók</a></li>
-															<li><a href="#">előadók</a></li>
-														</ul>
-													</div>
-													<div class="col-sm-3">
-														<h5>
-															közösségek <i class="fa fa-external-link"></i>
-														</h5>
-														<ul>
-															<li><a href="#">Klub 1</a></li>
-															<li><a href="#">Klub 2</a></li>
-															<li><a href="#">Klub 3</a></li>
-															<li><a href="#">Klub 4</a></li>
-															<li><a href="#">Klub 5</a></li>
-															<li><a href="#">...</a></li>
+															<li><a href="#">vendégek / előadók</a></li>
+															<li><a href="#">közösségek</a></li>
 														</ul>
 													</div>
 
