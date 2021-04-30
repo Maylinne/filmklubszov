@@ -28,7 +28,7 @@
 		<database.version>2.3.2</database.version>
 
 		<!-- Spring -->
-		<spring-bom.version>5.1.2.RELEASE</spring-bom.version>
+		<spring-bom.version>5.1.18.RELEASE</spring-bom.version>
 		<spring-data-jpa.version>1.6.0.RELEASE</spring-data-jpa.version>
 		<spring-version>5.1.2.RELEASE</spring-version>
 
