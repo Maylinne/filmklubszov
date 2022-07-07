@@ -22,7 +22,7 @@
 		<hibernate.version>5.3.7.Final</hibernate.version>
 
 		<!-- Validation -->
-		<validation.version>5.1.1.Final</validation.version>
+		<validation.version>6.0.23.Final</validation.version>
 
 		<!-- DataBase -->
 		<database.version>2.3.2</database.version>
